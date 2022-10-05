@@ -2,7 +2,7 @@ import { Box, BoxProps } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 
 export const VotingBoxBorder = styled(Box)<{ hasBoosted?: boolean }>`
-  border-radius: 12px;
+  border-radius: 6px;
   margin-bottom: 24px;
   padding: 1px 1px 3px 1px;
   border: ${({ hasBoosted }) => (hasBoosted ? '0px' : '1px')};
@@ -16,7 +16,7 @@ export const VotingBoxCardInner = styled(Box)<{ hasBoosted?: boolean }>`
   display: flex;
   padding: 0 16px;
   align-items: center;
-  border-radius: 12px;
+  border-radius: 6px;
   justify-content: space-between;
   background: ${({ theme, hasBoosted }) => (hasBoosted ? theme.colors.gradientBubblegum : 'transparent')};
 `

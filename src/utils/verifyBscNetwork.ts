@@ -1,5 +1,5 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 
-export const verifyBscNetwork = (chainId: number) => {
-  return chainId === ChainId.BSC || chainId === ChainId.BSC_TESTNET
+export const verifyPulseNetwork = (chainId: number) => {
+  return chainId === ChainId.PULSECHAIN_TESTNET || chainId === PRIMARY_CHAIN_ID
 }

@@ -1,6 +1,17 @@
-import { ChainId, Currency, CurrencyAmount, JSBI, Pair, Price, Token, WNATIVE, WBNB } from '@pancakeswap/sdk'
+import {
+  ChainId,
+  Currency,
+  CurrencyAmount,
+  JSBI,
+  Pair,
+  Price,
+  PRIMARY_CHAIN_ID,
+  Token,
+  WNATIVE,
+  WPULSE,
+} from '@pancakeswap/sdk'
 import { FAST_INTERVAL } from 'config/constants'
-import { BUSD, CAKE, USDC } from '@pancakeswap/tokens'
+import { DEX_TOKEN, USDC } from '@pancakeswap/tokens'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useMemo } from 'react'
 import useSWR from 'swr'
@@ -19,7 +30,7 @@ export default function useBUSDPrice(currency?: Currency): Price<Currency, Curre
   const { chainId } = useActiveWeb3React()
   const wrapped = currency?.wrapped
   const wnative = WNATIVE[chainId]
-  const stable = BUSD[chainId] || USDC[chainId]
+  const stable = USDC[chainId]
 
   const tokenPairs: [Currency | undefined, Currency | undefined][] = useMemo(
     () => [
@@ -144,7 +155,7 @@ export const useBUSDCurrencyAmount = (currency?: Currency, amount?: number): num
 }
 
 export const useBUSDCakeAmount = (amount: number): number | undefined => {
-  const cakeBusdPrice = useCakeBusdPrice()
+  const cakeBusdPrice = useMainTokenUsdPrice()
   if (cakeBusdPrice) {
     return multiplyPriceByAmount(cakeBusdPrice, amount)
   }
@@ -152,19 +163,27 @@ export const useBUSDCakeAmount = (amount: number): number | undefined => {
 }
 
 // @Note: only fetch from one pair
-export const useCakeBusdPrice = ({ forceMainnet } = { forceMainnet: false }): Price<Currency, Currency> | undefined => {
+export const useMainTokenUsdPrice = (
+  { forceMainnet } = { forceMainnet: false },
+): Price<Currency, Currency> | undefined => {
   const { chainId } = useActiveWeb3React()
   const isTestnet = !forceMainnet && isChainTestnet(chainId)
   // Return bsc testnet cake if chain is testnet
-  const cake: Token = isTestnet ? CAKE[ChainId.BSC_TESTNET] : CAKE[ChainId.BSC]
-  return usePriceByPairs(BUSD[cake.chainId], cake)
+  // TODO change to mainnet
+  const cake: Token = isTestnet ? DEX_TOKEN[ChainId.PULSECHAIN_TESTNET] : DEX_TOKEN[PRIMARY_CHAIN_ID]
+  // const cake: Token = isTestnet ? CAKE[ChainId.BSC_TESTNET] : CAKE[ChainId.BSC]
+  return usePriceByPairs(USDC[cake.chainId], cake)
 }
 
 // @Note: only fetch from one pair
-export const useBNBBusdPrice = ({ forceMainnet } = { forceMainnet: false }): Price<Currency, Currency> | undefined => {
+export const useNativeUsdPrice = (
+  { forceMainnet } = { forceMainnet: false },
+): Price<Currency, Currency> | undefined => {
   const { chainId } = useActiveWeb3React()
   const isTestnet = !forceMainnet && isChainTestnet(chainId)
   // Return bsc testnet wbnb if chain is testnet
-  const wbnb: Token = isTestnet ? WBNB[ChainId.BSC_TESTNET] : WBNB[ChainId.BSC]
-  return usePriceByPairs(BUSD[wbnb.chainId], wbnb)
+  // const wbnb: Token = isTestnet ? WBNB[ChainId.BSC_TESTNET] : WBNB[ChainId.BSC]
+  // TODO change to mainnet
+  const wbnb: Token = isTestnet ? WPULSE[ChainId.PULSECHAIN_TESTNET] : WPULSE[PRIMARY_CHAIN_ID]
+  return usePriceByPairs(USDC[wbnb.chainId], wbnb)
 }

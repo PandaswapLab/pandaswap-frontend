@@ -1,4 +1,4 @@
-import { ChainId, Pair, Token } from '@pancakeswap/sdk'
+import { ChainId, Pair, PRIMARY_CHAIN_ID, Token } from '@pancakeswap/sdk'
 import { deserializeToken } from '@pancakeswap/tokens'
 import { differenceInDays } from 'date-fns'
 import flatMap from 'lodash/flatMap'
@@ -407,13 +407,13 @@ export function useGasPrice(): string {
   const userGas = useSelector<AppState, AppState['user']['gasPrice']>((state) => state.user.gasPrice)
   const { data } = useFeeData({
     chainId,
-    enabled: chainId !== ChainId.BSC && chainId !== ChainId.BSC_TESTNET,
+    enabled: chainId !== PRIMARY_CHAIN_ID && chainId !== ChainId.PULSECHAIN_TESTNET,
     watch: true,
   })
-  if (chainId === ChainId.BSC) {
+  if (chainId === PRIMARY_CHAIN_ID) {
     return userGas
   }
-  if (chainId === ChainId.BSC_TESTNET) {
+  if (chainId === ChainId.PULSECHAIN_TESTNET) {
     return GAS_PRICE_GWEI.testnet
   }
   if (chain?.testnet) {

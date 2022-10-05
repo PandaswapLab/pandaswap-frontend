@@ -1,7 +1,7 @@
-import { Token, Pair, ChainId } from '@pancakeswap/sdk'
+import { Token, Pair, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { isAddress } from 'utils'
 
-const getLpAddress = (token1: string | Token, token2: string | Token, chainId: number = ChainId.BSC) => {
+const getLpAddress = (token1: string | Token, token2: string | Token, chainId: number = PRIMARY_CHAIN_ID) => {
   let token1AsTokenInstance = token1
   let token2AsTokenInstance = token2
   if (!token1 || !token2) {

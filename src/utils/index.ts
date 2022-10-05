@@ -4,7 +4,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { AddressZero } from '@ethersproject/constants'
 import { Contract } from '@ethersproject/contracts'
 import type { Provider } from '@ethersproject/providers'
-import { ChainId, Currency } from '@pancakeswap/sdk'
+import { ChainId, Currency, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { bsc } from '@pancakeswap/wagmi/chains'
 import memoize from 'lodash/memoize'
 import { TokenAddressMap } from '@pancakeswap/tokens'
@@ -24,7 +24,7 @@ export function getBlockExploreLink(
   type: 'transaction' | 'token' | 'address' | 'block' | 'countdown',
   chainIdOverride?: number,
 ): string {
-  const chainId = chainIdOverride || ChainId.BSC
+  const chainId = chainIdOverride || PRIMARY_CHAIN_ID
   const chain = chains.find((c) => c.id === chainId)
   if (!chain) return bsc.blockExplorers.default.url
   switch (type) {
@@ -47,7 +47,7 @@ export function getBlockExploreLink(
 }
 
 export function getBlockExploreName(chainIdOverride?: number) {
-  const chainId = chainIdOverride || ChainId.BSC
+  const chainId = chainIdOverride || ChainId.PULSECHAIN_TESTNET
   const chain = chains.find((c) => c.id === chainId)
 
   return chain?.blockExplorers?.default.name || bsc.blockExplorers.default.name

@@ -33,26 +33,28 @@ const ProfileUserMenuItem: React.FC<React.PropsWithChildren<ProfileUserMenuItemP
     )
   }
 
-  if (!hasProfile) {
-    return (
-      <NextLink href="/create-profile" passHref>
-        <UserMenuItem as="a" disabled={disabled}>
-          <Flex alignItems="center" justifyContent="space-between" width="100%">
-            {t('Make a Profile')}
-            <Dot />
-          </Flex>
-        </UserMenuItem>
-      </NextLink>
-    )
-  }
+  return <></>
+  // TODO maybe later add profile
+  // if (!hasProfile) {
+  //   return (
+  //     <NextLink href="/create-profile" passHref>
+  //       <UserMenuItem as="a" disabled={disabled}>
+  //         <Flex alignItems="center" justifyContent="space-between" width="100%">
+  //           {t('Make a Profile')}
+  //           <Dot />
+  //         </Flex>
+  //       </UserMenuItem>
+  //     </NextLink>
+  //   )
+  // }
 
-  return (
-    <NextLink href={`/profile/${account?.toLowerCase()}/achievements`} passHref>
-      <UserMenuItem as="a" disabled={disabled}>
-        {t('Your Profile')}
-      </UserMenuItem>
-    </NextLink>
-  )
+  // return (
+  //   <NextLink href={`/profile/${account?.toLowerCase()}/achievements`} passHref>
+  //     <UserMenuItem as="a" disabled={disabled}>
+  //       {t('Your Profile')}
+  //     </UserMenuItem>
+  //   </NextLink>
+  // )
 }
 
 export default ProfileUserMenuItem

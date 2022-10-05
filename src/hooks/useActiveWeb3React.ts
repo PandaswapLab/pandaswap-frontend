@@ -3,7 +3,7 @@ import { useRouter, NextRouter } from 'next/router'
 import { useEffect } from 'react'
 import { isChainSupported } from 'utils/wagmi'
 import { useProvider } from 'wagmi'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { useActiveChainId } from './useActiveChainId'
 import { useSwitchNetworkLoading } from './useSwitchNetworkLoading'
 
@@ -19,7 +19,7 @@ export function useNetworkConnectorUpdater() {
   useEffect(() => {
     if (loading || !router.isReady) return
     const parsedQueryChainId = Number(router.query.chainId)
-    if (!parsedQueryChainId && chainId === ChainId.BSC) return
+    if (!parsedQueryChainId && chainId === PRIMARY_CHAIN_ID) return
     if (parsedQueryChainId !== chainId && isChainSupported(chainId)) {
       const uriHash = getHashFromRouter(router)?.[0]
       router.replace(

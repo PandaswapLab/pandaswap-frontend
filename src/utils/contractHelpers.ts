@@ -4,7 +4,7 @@ import { provider } from 'utils/wagmi'
 import { Contract } from '@ethersproject/contracts'
 import poolsConfig from 'config/constants/pools'
 import { PoolCategory } from 'config/constants/types'
-import { CAKE } from '@pancakeswap/tokens'
+import { DEX_TOKEN } from '@pancakeswap/tokens'
 
 // Addresses
 import {
@@ -15,7 +15,6 @@ import {
   getBunnySpecialAddress,
   getLotteryV2Address,
   getMasterChefAddress,
-  getMasterChefV1Address,
   getPointCenterIfoAddress,
   getClaimRefundAddress,
   getTradingCompetitionAddressEaster,
@@ -57,7 +56,6 @@ import ifoV2Abi from 'config/abi/ifoV2.json'
 import pointCenterIfo from 'config/abi/pointCenterIfo.json'
 import lotteryV2Abi from 'config/abi/lotteryV2.json'
 import masterChef from 'config/abi/masterchef.json'
-import masterChefV1 from 'config/abi/masterchefV1.json'
 import sousChef from 'config/abi/sousChef.json'
 import sousChefV2 from 'config/abi/sousChefV2.json'
 import sousChefBnb from 'config/abi/sousChefBnb.json'
@@ -109,7 +107,6 @@ import type {
   PancakeProfile,
   LotteryV2,
   Masterchef,
-  MasterchefV1,
   SousChef,
   SousChefV2,
   BunnySpecial,
@@ -145,7 +142,7 @@ import { ChainId } from '@pancakeswap/sdk'
 export const getContract = ({
   abi,
   address,
-  chainId = ChainId.BSC,
+  chainId = ChainId.PULSECHAIN_TESTNET,
   signer,
 }: {
   abi: any
@@ -191,7 +188,7 @@ export const getPointCenterIfoContract = (signer?: Signer | Provider) => {
 export const getCakeContract = (signer?: Signer | Provider, chainId?: number) => {
   return getContract({
     abi: cakeAbi,
-    address: chainId ? CAKE[chainId].address : CAKE[ChainId.BSC].address,
+    address: chainId ? DEX_TOKEN[chainId].address : DEX_TOKEN[ChainId.PULSECHAIN_TESTNET].address,
     signer,
   }) as Cake
 }
@@ -212,9 +209,6 @@ export const getLotteryV2Contract = (signer?: Signer | Provider) => {
 }
 export const getMasterchefContract = (signer?: Signer | Provider, chainId?: number) => {
   return getContract({ abi: masterChef, address: getMasterChefAddress(chainId), signer }) as Masterchef
-}
-export const getMasterchefV1Contract = (signer?: Signer | Provider) => {
-  return getContract({ abi: masterChefV1, address: getMasterChefV1Address(), signer }) as MasterchefV1
 }
 export const getClaimRefundContract = (signer?: Signer | Provider) => {
   return getContract({ abi: claimRefundAbi, address: getClaimRefundAddress(), signer }) as ClaimRefund

@@ -54,11 +54,7 @@ export type TokenAddressMap = Readonly<{
  * An empty result, useful as a default.
  */
 export const EMPTY_LIST: TokenAddressMap = {
-  [ChainId.ETHEREUM]: {},
-  [ChainId.RINKEBY]: {},
-  [ChainId.GOERLI]: {},
-  [ChainId.BSC]: {},
-  [ChainId.BSC_TESTNET]: {},
+  [ChainId.PULSECHAIN_TESTNET]: {},
 }
 
 export function deserializeToken(serializedToken: SerializedWrappedToken): Token {

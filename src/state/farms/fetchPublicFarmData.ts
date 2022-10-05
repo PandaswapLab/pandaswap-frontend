@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import erc20 from 'config/abi/erc20.json'
 import chunk from 'lodash/chunk'
 import { getMasterChefAddress } from 'utils/addressHelpers'
@@ -45,7 +45,10 @@ const fetchFarmCalls = (farm: SerializedFarm, chainId: number) => {
   ]
 }
 
-export const fetchPublicFarmsData = async (farms: SerializedFarmConfig[], chainId = ChainId.BSC): Promise<any[]> => {
+export const fetchPublicFarmsData = async (
+  farms: SerializedFarmConfig[],
+  chainId = PRIMARY_CHAIN_ID,
+): Promise<any[]> => {
   const farmCalls = farms.flatMap((farm) => fetchFarmCalls(farm, chainId))
   const chunkSize = farmCalls.length / farms.length
   const farmMultiCallResult = await multicallv2({ abi: erc20, calls: farmCalls, chainId })

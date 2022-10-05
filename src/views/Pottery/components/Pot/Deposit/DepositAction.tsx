@@ -19,13 +19,13 @@ const InputPanel = styled.div`
   display: flex;
   flex-flow: column nowrap;
   position: relative;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.backgroundAlt};
   z-index: 1;
 `
 
 const Container = styled.div<InputProps>`
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 8px 16px;
   background-color: ${({ theme }) => theme.colors.input};
   box-shadow: ${({ theme, isWarning }) => (isWarning ? theme.shadows.warning : theme.shadows.inset)};

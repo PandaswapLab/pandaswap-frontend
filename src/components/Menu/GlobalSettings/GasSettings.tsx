@@ -4,7 +4,7 @@ import { useTranslation } from '@pancakeswap/localization'
 import { useGasPriceManager } from 'state/user/hooks'
 import { GAS_PRICE_GWEI, GAS_PRICE } from 'state/types'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { ChainId } from '@pancakeswap/sdk'
+import { PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 
 const GasSettings = () => {
   const { t } = useTranslation()
@@ -13,7 +13,7 @@ const GasSettings = () => {
 
   return (
     <Flex flexDirection="column">
-      {chainId === ChainId.BSC && (
+      {chainId === PRIMARY_CHAIN_ID && (
         <Flex mb="12px" alignItems="center">
           <Text>{t('Default Transaction Speed (GWEI)')}</Text>
           <QuestionHelper

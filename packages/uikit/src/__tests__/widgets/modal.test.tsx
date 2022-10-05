@@ -35,7 +35,7 @@ it("renders correctly", () => {
       -ms-flex-align: center;
       align-items: center;
       border: 0;
-      border-radius: 16px;
+      border-radius: 8px;
       box-shadow: 0px -1px 0px 0px rgba(14,14,44,0.4) inset;
       cursor: pointer;
       display: -webkit-inline-box;
@@ -191,7 +191,7 @@ it("renders correctly", () => {
         width: auto;
         position: auto;
         bottom: auto;
-        border-radius: 32px;
+        border-radius: 16px;
         max-height: 100vh;
       }
     }

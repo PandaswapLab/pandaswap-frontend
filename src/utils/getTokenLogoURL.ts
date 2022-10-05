@@ -1,8 +1,7 @@
 import { ChainId, Token } from '@pancakeswap/sdk'
 
 const mapping = {
-  [ChainId.BSC]: 'smartchain',
-  [ChainId.ETHEREUM]: 'ethereum',
+  [ChainId.PULSECHAIN_TESTNET]: 'ethereum',
 }
 
 const getTokenLogoURL = (token?: Token) => {

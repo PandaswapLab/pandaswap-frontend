@@ -23,7 +23,7 @@ import { useWeb3React } from '@pancakeswap/wagmi'
 import { useGetMinBetAmount } from 'state/predictions/hooks'
 import { useTranslation } from '@pancakeswap/localization'
 import { usePredictionsContract } from 'hooks/useContract'
-import { useGetBnbBalance, useGetCakeBalance } from 'hooks/useTokenBalance'
+import { useGetBnbBalance, useGetDexTokenBalance } from 'hooks/useTokenBalance'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { BetPosition } from 'state/types'
@@ -78,7 +78,7 @@ const getValueAsEthersBn = (value: string) => {
 
 const TOKEN_BALANCE_CONFIG = {
   BNB: useGetBnbBalance,
-  CAKE: useGetCakeBalance,
+  CAKE: useGetDexTokenBalance,
 }
 
 const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> = ({

@@ -1,13 +1,13 @@
 import NoBscVaultAbi from 'config/abi/NoBscVaultAbi.json'
 import { getMasterChefAddress } from 'utils/addressHelpers'
 import { multicallv2 } from 'utils/multicall'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 
 // will return BSC or BSC Testnet chainId
-export const getBscChainId = async (chainId: number) => {
+export const getPulseChainId = async (chainId: number) => {
   try {
     if (!chainId) {
-      return ChainId.BSC
+      return PRIMARY_CHAIN_ID
     }
 
     const calls = [
@@ -20,6 +20,6 @@ export const getBscChainId = async (chainId: number) => {
     return bscChainId
   } catch (error) {
     console.error('Get BSC Chain Id Error: ', error)
-    return ChainId.BSC
+    return PRIMARY_CHAIN_ID
   }
 }

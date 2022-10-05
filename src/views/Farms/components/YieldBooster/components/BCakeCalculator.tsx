@@ -22,7 +22,7 @@ const BCakeBlock = styled.div`
   width: 100%;
   padding: 16px;
   box-sizing: border-box;
-  border-radius: 16px;
+  border-radius: 8px;
 `
 interface BCakeCalculatorProps {
   targetInputBalance: string

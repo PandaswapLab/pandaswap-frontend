@@ -5,7 +5,7 @@ import { Button, Flex, Text, InjectedModalProps, Message, MessageText } from '@p
 import { formatBigNumber } from 'utils/formatBalance'
 import { getPancakeProfileAddress } from 'utils/addressHelpers'
 import { useCake } from 'hooks/useContract'
-import { useGetCakeBalance } from 'hooks/useTokenBalance'
+import { useGetDexTokenBalance } from 'hooks/useTokenBalance'
 import { useTranslation } from '@pancakeswap/localization'
 import useGetProfileCosts from 'views/Profile/hooks/useGetProfileCosts'
 import { FetchStatus } from 'config/constants/types'
@@ -46,7 +46,7 @@ const StartPage: React.FC<React.PropsWithChildren<StartPageProps>> = ({ goToAppr
   const { account } = useWeb3React()
   const { reader: cakeContract } = useCake()
   const { profile } = useProfile()
-  const { balance: cakeBalance, fetchStatus } = useGetCakeBalance()
+  const { balance: cakeBalance, fetchStatus } = useGetDexTokenBalance()
   const {
     costs: { numberCakeToUpdate, numberCakeToReactivate },
     isLoading: isProfileCostsLoading,

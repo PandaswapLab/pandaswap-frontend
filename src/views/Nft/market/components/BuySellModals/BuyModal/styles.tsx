@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Modal, Grid, Flex, Text, BinanceIcon, Skeleton } from '@pancakeswap/uikit'
-import { useBNBBusdPrice } from 'hooks/useBUSDPrice'
+import { useNativeUsdPrice } from 'hooks/useBUSDPrice'
 import { multiplyPriceByAmount } from 'utils/prices'
 import { BuyingStage } from './types'
 
@@ -43,7 +43,7 @@ export const BnbAmountCell: React.FC<React.PropsWithChildren<BnbAmountCellProps>
   isLoading,
   isInsufficient,
 }) => {
-  const bnbBusdPrice = useBNBBusdPrice()
+  const bnbBusdPrice = useNativeUsdPrice()
   if (isLoading) {
     return (
       <Flex flexDirection="column" justifySelf="flex-end">

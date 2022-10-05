@@ -17,9 +17,8 @@ import { BIG_ZERO } from 'utils/bigNumber'
 import cakeAbi from 'config/abi/cake.json'
 import { getCakeVaultAddress, getCakeFlexibleSideVaultAddress } from 'utils/addressHelpers'
 import { multicallv2 } from 'utils/multicall'
-import { bscTokens } from '@pancakeswap/tokens'
 import { getBalanceNumber } from 'utils/formatBalance'
-import { bscRpcProvider } from 'utils/providers'
+import { mainnetRpcProvider } from 'utils/providers'
 import { getPoolsPriceHelperLpFiles } from 'config/constants/priceHelperLps/index'
 import fetchFarms from '../farms/fetchFarms'
 import getFarmsPrices from '../farms/getFarmsPrices'
@@ -40,6 +39,8 @@ import { getTokenPricesFromFarm } from './helpers'
 import { resetUserState } from '../global/actions'
 import { fetchUserIfoCredit, fetchPublicIfoData } from './fetchUserIfo'
 import { fetchVaultUser, fetchFlexibleSideVaultUser } from './fetchVaultUser'
+import { DEX_TOKEN } from '@pancakeswap/tokens'
+import { PRIMARY_CHAIN_ID } from '../../../packages/swap-sdk/src/constants'
 
 export const initialPoolVaultState = Object.freeze({
   totalShares: null,
@@ -109,12 +110,12 @@ export const fetchCakePoolPublicDataAsync = () => async (dispatch, getState) => 
 
 export const fetchCakePoolUserDataAsync = (account: string) => async (dispatch) => {
   const allowanceCall = {
-    address: bscTokens.cake.address,
+    address: DEX_TOKEN[PRIMARY_CHAIN_ID].address,
     name: 'allowance',
     params: [account, cakeVaultAddress],
   }
   const balanceOfCall = {
-    address: bscTokens.cake.address,
+    address: DEX_TOKEN[PRIMARY_CHAIN_ID].address,
     name: 'balanceOf',
     params: [account],
   }
@@ -139,7 +140,7 @@ export const fetchPoolsPublicDataAsync =
         fetchPoolsBlockLimits(),
         fetchPoolsTotalStaking(),
         fetchPoolsProfileRequirement(),
-        currentBlockNumber ? Promise.resolve(currentBlockNumber) : bscRpcProvider.getBlockNumber(),
+        currentBlockNumber ? Promise.resolve(currentBlockNumber) : mainnetRpcProvider.getBlockNumber(),
       ])
 
       const blockLimitsSousIdMap = fromPairs(blockLimits.map((entry) => [entry.sousId, entry]))

@@ -88,7 +88,7 @@ const SwapCallbackErrorInnerAlertTriangle = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 12px;
-  border-radius: 12px;
+  border-radius: 6px;
   min-width: 48px;
   height: 48px;
 `
@@ -107,6 +107,6 @@ export function SwapCallbackError({ error }: { error: string }) {
 export const SwapShowAcceptChanges = styled(AutoColumn)`
   background-color: ${({ theme }) => `${theme.colors.warning33}`};
   padding: 0.5rem;
-  border-radius: 12px;
+  border-radius: 6px;
   margin-top: 8px;
 `

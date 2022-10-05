@@ -22,8 +22,8 @@ const StyledModal = styled(ModalContainer)`
 
 const StyledModalHeader = styled(ModalHeader)`
   background: ${({ theme }) => theme.colors.gradientCardHeader};
-  border-top-right-radius: 32px;
-  border-top-left-radius: 32px;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
 `
 
 const BunnyDecoration = styled.div`

@@ -20,7 +20,7 @@ const BannerPlaceHolder = styled.div<{ walletConnected: boolean }>`
   }
   &::before {
     content: '';
-    border-radius: 32px;
+    border-radius: 16px;
     position: absolute;
     top: 0px;
     left: 0px;

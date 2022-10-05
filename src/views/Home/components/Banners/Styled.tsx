@@ -31,7 +31,7 @@ export const StyledHeading = styled(Heading)`
   }
 `
 export const Wrapper = styled.div`
-  border-radius: 32px;
+  border-radius: 16px;
   width: 100%;
   max-height: max-content;
   overflow: visible;

@@ -1,8 +1,7 @@
 import { MaxUint256, Zero } from '@ethersproject/constants'
 import { formatEther, parseUnits } from '@ethersproject/units'
 import { TranslateFunction, useTranslation } from '@pancakeswap/localization'
-import { ChainId } from '@pancakeswap/sdk'
-import { bscTokens } from '@pancakeswap/tokens'
+import { WNATIVE } from '@pancakeswap/sdk'
 import { InjectedModalProps, useToast } from '@pancakeswap/uikit'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import { ToastDescriptionWithTx } from 'components/Toast'
@@ -47,7 +46,7 @@ const BuyModal: React.FC<React.PropsWithChildren<BuyModalProps>> = ({ nftToBuy, 
   const { callWithGasPrice } = useCallWithGasPrice()
 
   const { account, chainId } = useWeb3React()
-  const wbnbAddress = chainId === ChainId.BSC_TESTNET ? TESTNET_WBNB_NFT_ADDRESS : bscTokens.wbnb.address
+  const wbnbAddress = WNATIVE[chainId].address
   const wbnbContractReader = useERC20(wbnbAddress, false)
   const wbnbContractApprover = useERC20(wbnbAddress)
   const nftMarketContract = useNftMarketContract()

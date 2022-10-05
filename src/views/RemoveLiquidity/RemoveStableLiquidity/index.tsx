@@ -53,7 +53,7 @@ import { useStableDerivedBurnInfo } from './hooks/useStableDerivedBurnInfo'
 
 const BorderCard = styled.div`
   border: solid 1px ${({ theme }) => theme.colors.cardBorder};
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 16px;
 `
 

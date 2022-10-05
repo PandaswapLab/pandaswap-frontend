@@ -24,8 +24,8 @@ export const DrawerContainer = styled.div<{ isUnmounting: boolean }>`
   height: 80vh;
   bottom: 0;
   background-color: ${({ theme }) => theme.colors.backgroundAlt};
-  border-top-left-radius: 32px;
-  border-top-right-radius: 32px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   position: fixed;
   animation: ${mountAnimation} 350ms ease forwards;
   padding-bottom: env(safe-area-inset-bottom);

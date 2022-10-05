@@ -56,7 +56,7 @@ export function PageNetworkSupportModal() {
           <Button
             variant={foundChain && lastValidPath ? 'secondary' : 'primary'}
             isLoading={isLoading}
-            onClick={() => switchNetworkAsync(ChainId.BSC)}
+            onClick={() => switchNetworkAsync(PRIMARY_CHAIN_ID)}
           >
             {t('Switch to %chain%', { chain: 'BNB Smart Chain' })}
           </Button>

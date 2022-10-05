@@ -46,8 +46,8 @@ export const tokens = {
   radii: {
     '0': '0px',
     small: '4px',
-    default: '16px',
-    card: '24px',
+    default: '8px',
+    card: '12px',
     circle: '50%',
   },
   fontSizes: {

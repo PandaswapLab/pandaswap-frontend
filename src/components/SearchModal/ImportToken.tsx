@@ -16,8 +16,7 @@ interface ImportProps {
   handleCurrencySelect?: (currency: Currency) => void
 }
 
-const getStandard = (chainId: ChainId) =>
-  chainId !== ChainId.BSC && chainId !== ChainId.BSC_TESTNET ? 'ERC20' : 'BEP20'
+const getStandard = (chainId: ChainId) => 'ERC20'
 
 function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
   const { chainId } = useActiveWeb3React()

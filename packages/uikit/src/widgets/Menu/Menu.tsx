@@ -63,6 +63,8 @@ const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
   max-width: 100%;
 `;
 
+const showSublinks = false;
+
 const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   linkComponent = "a",
   banner,
@@ -154,7 +156,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
             </Flex>
           </StyledNav>
         </FixedContainer>
-        {subLinks && (
+        {showSublinks && subLinks && (
           <Flex justifyContent="space-around">
             <SubMenuItems items={subLinksWithoutMobile} mt={`${totalTopMenuHeight + 1}px`} activeItem={activeSubItem} />
 
@@ -168,7 +170,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
             )}
           </Flex>
         )}
-        <BodyWrapper mt={!subLinks ? `${totalTopMenuHeight + 1}px` : "0"}>
+        <BodyWrapper mt={!subLinks || !showSublinks ? `${totalTopMenuHeight + 1}px` : "0"}>
           <Inner isPushed={false} showMenu={showMenu}>
             {children}
             <Footer

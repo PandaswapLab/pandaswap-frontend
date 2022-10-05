@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { ACCESS_RISK_API } from 'config/constants/endpoints'
 
 export enum TOKEN_RISK {
@@ -63,7 +63,7 @@ export const fetchRiskToken = async (address: string, chainId: number): Promise<
     return {
       isSuccess: false,
       address: '',
-      chainId: ChainId.BSC,
+      chainId: PRIMARY_CHAIN_ID,
       riskLevel: TokenRiskPhases[0],
       riskResult: '',
       scannedTs: 0,

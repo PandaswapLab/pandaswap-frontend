@@ -1,6 +1,6 @@
 import { BinanceWalletConnector } from '@pancakeswap/wagmi/connectors/binanceWallet'
 import { bsc, bscTest, goerli, rinkeby, mainnet } from '@pancakeswap/wagmi/chains'
-import { configureChains, createClient } from 'wagmi'
+import { Chain, configureChains, createClient, defaultChains } from 'wagmi'
 import memoize from 'lodash/memoize'
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
 import { InjectedConnector } from 'wagmi/connectors/injected'
@@ -9,7 +9,32 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { SafeConnector } from '@gnosis.pm/safe-apps-wagmi'
 
-const CHAINS = [bsc, mainnet, bscTest, rinkeby, goerli]
+const PULSECHAIN_TESTNET_CHAIN: Chain = {
+  id: 941,
+  name: 'PulseChain Testnet',
+  network: 'pulsechaintestnet',
+  rpcUrls: {
+    public: 'https://rpc.v2b.testnet.pulsechain.com',
+    default: 'https://rpc.v2b.testnet.pulsechain.com',
+  },
+  blockExplorers: {
+    default: {
+      name: 'blockscout',
+      url: 'https://scan.v2b.testnet.pulsechain.com',
+    },
+  },
+  nativeCurrency: {
+    name: 'Pulse',
+    symbol: 'TPLS',
+    decimals: 18,
+  },
+  multicall: {
+    address: '0xcA11bde05977b3631167028862bE2a173976CA11',
+    blockCreated: 14353601,
+  },
+}
+
+const CHAINS = [PULSECHAIN_TESTNET_CHAIN]
 
 const getNodeRealUrl = (networkName: string) => {
   let host = null

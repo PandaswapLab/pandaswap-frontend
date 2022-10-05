@@ -1,5 +1,5 @@
 import { useTranslation } from '@pancakeswap/localization'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import {
   Box,
   Flex,
@@ -66,15 +66,16 @@ const UserMenu = () => {
           {hasPendingTransactions && <RefreshIcon spin />}
         </UserMenuItem>
         <UserMenuDivider />
-        <NextLink href={`/profile/${account?.toLowerCase()}`} passHref>
-          <UserMenuItem as="a" disabled={isWrongNetwork || chainId !== ChainId.BSC}>
+        {/* TODO maybe add nfts in future */}
+        {/* <NextLink href={`/profile/${account?.toLowerCase()}`} passHref>
+          <UserMenuItem as="a" disabled={isWrongNetwork || chainId !== PRIMARY_CHAIN_ID}>
             {t('Your NFTs')}
           </UserMenuItem>
-        </NextLink>
+        </NextLink> */}
         <ProfileUserMenuItem
           isLoading={isLoading}
           hasProfile={hasProfile}
-          disabled={isWrongNetwork || chainId !== ChainId.BSC}
+          disabled={isWrongNetwork || chainId !== PRIMARY_CHAIN_ID}
         />
         <UserMenuDivider />
         <UserMenuItem as="button" onClick={logout}>

@@ -20,7 +20,7 @@ import { parseISO, formatDistance } from 'date-fns'
 import { useWeb3React, useSignMessage } from '@pancakeswap/wagmi'
 import { formatUnits } from '@ethersproject/units'
 import { API_PROFILE } from 'config/constants/endpoints'
-import { useGetCakeBalance } from 'hooks/useTokenBalance'
+import { useGetDexTokenBalance } from 'hooks/useTokenBalance'
 import fetchWithTimeout from 'utils/fetchWithTimeout'
 import { useTranslation } from '@pancakeswap/localization'
 import { FetchStatus } from 'config/constants/types'
@@ -67,7 +67,7 @@ const UserName: React.FC<React.PropsWithChildren> = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
   const fetchAbortSignal = useRef<AbortController>(null)
-  const { balance: cakeBalance, fetchStatus } = useGetCakeBalance()
+  const { balance: cakeBalance, fetchStatus } = useGetDexTokenBalance()
   const hasMinimumCakeRequired = fetchStatus === FetchStatus.Fetched && cakeBalance.gte(REGISTER_COST)
   const [onPresentConfirmProfileCreation] = useModal(
     <ConfirmProfileCreationModal

@@ -6,7 +6,7 @@ import { useTranslation, languageList } from '@pancakeswap/localization'
 import PhishingWarningBanner from 'components/PhishingWarningBanner'
 import { NetworkSwitcher } from 'components/NetworkSwitcher'
 import useTheme from 'hooks/useTheme'
-import { useCakeBusdPrice } from 'hooks/useBUSDPrice'
+import { useMainTokenUsdPrice } from 'hooks/useBUSDPrice'
 import { usePhishingBannerManager } from 'state/user/hooks'
 import UserMenu from './UserMenu'
 import { useMenuItems } from './hooks/useMenuItems'
@@ -17,10 +17,10 @@ import { SettingsMode } from './GlobalSettings/types'
 
 const Menu = (props) => {
   const { isDark, setTheme } = useTheme()
-  const cakePriceUsd = useCakeBusdPrice({ forceMainnet: true })
+  const cakePriceUsd = useMainTokenUsdPrice({ forceMainnet: true })
   const { currentLanguage, setLanguage, t } = useTranslation()
   const { pathname } = useRouter()
-  const [showPhishingWarningBanner] = usePhishingBannerManager()
+  // const [showPhishingWarningBanner] = usePhishingBannerManager()
 
   const menuItems = useMenuItems()
 
@@ -48,7 +48,8 @@ const Menu = (props) => {
             <UserMenu />
           </>
         }
-        banner={showPhishingWarningBanner && typeof window !== 'undefined' && <PhishingWarningBanner />}
+        // TODO maybe add phising banner
+        // banner={showPhishingWarningBanner && typeof window !== 'undefined' && <PhishingWarningBanner />}
         isDark={isDark}
         toggleTheme={toggleTheme}
         currentLang={currentLanguage.code}

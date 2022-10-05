@@ -1,7 +1,7 @@
 import { BigNumber, FixedNumber } from '@ethersproject/bignumber'
 import { formatUnits } from '@ethersproject/units'
 import { MultiCallV2 } from '@pancakeswap/multicall'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { FIXED_TWO, FIXED_ZERO } from './const'
 import { getFarmsPrices } from './farmPrices'
 import { fetchPublicFarmsData } from './fetchPublicFarmData'
@@ -164,7 +164,7 @@ export const fetchMasterChefData = async (
     const masterChefMultiCallResult = await multicallv2({
       abi: masterChefV2Abi,
       calls: masterChefAggregatedCalls,
-      chainId: isTestnet ? ChainId.BSC_TESTNET : ChainId.BSC,
+      chainId: isTestnet ? ChainId.PULSECHAIN_TESTNET : PRIMARY_CHAIN_ID,
     })
 
     let masterChefChunkedResultCounter = 0
@@ -215,7 +215,7 @@ export const fetchMasterChefV2Data = async ({
           params: [true],
         },
       ],
-      chainId: isTestnet ? ChainId.BSC_TESTNET : ChainId.BSC,
+      chainId: isTestnet ? ChainId.PULSECHAIN_TESTNET : PRIMARY_CHAIN_ID,
     })
 
     return {

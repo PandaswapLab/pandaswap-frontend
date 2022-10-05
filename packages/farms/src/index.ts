@@ -1,12 +1,12 @@
 import { formatEther } from '@ethersproject/units'
 import { MultiCallV2 } from '@pancakeswap/multicall'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { masterChefAddresses } from './const'
 import type { FarmWithPrices } from './farmPrices'
 import { farmV2FetchFarms, FetchFarmsParams, fetchMasterChefV2Data } from './fetchFarms'
 
-const supportedChainId = [ChainId.GOERLI, ChainId.BSC, ChainId.BSC_TESTNET]
-export const bCakeSupportedChainId = [ChainId.BSC, ChainId.BSC_TESTNET]
+const supportedChainId = [ChainId.PULSECHAIN_TESTNET]
+export const bCakeSupportedChainId = [ChainId.PULSECHAIN_TESTNET]
 
 export function createFarmFetcher(multicallv2: MultiCallV2) {
   const fetchFarms = async (
@@ -15,7 +15,9 @@ export function createFarmFetcher(multicallv2: MultiCallV2) {
     } & Pick<FetchFarmsParams, 'chainId' | 'farms'>,
   ) => {
     const { isTestnet, farms, chainId } = params
-    const masterChefAddress = isTestnet ? masterChefAddresses[ChainId.BSC_TESTNET] : masterChefAddresses[ChainId.BSC]
+    const masterChefAddress = isTestnet
+      ? masterChefAddresses[ChainId.PULSECHAIN_TESTNET]
+      : masterChefAddresses[PRIMARY_CHAIN_ID]
     const { poolLength, totalRegularAllocPoint, totalSpecialAllocPoint, cakePerBlock } = await fetchMasterChefV2Data({
       isTestnet,
       multicallv2,
@@ -42,7 +44,7 @@ export function createFarmFetcher(multicallv2: MultiCallV2) {
     fetchFarms,
     isChainSupported: (chainId: number) => supportedChainId.includes(chainId),
     supportedChainId,
-    isTestnet: (chainId: number) => ![ChainId.BSC].includes(chainId),
+    isTestnet: (chainId: number) => chainId === ChainId.PULSECHAIN_TESTNET,
   }
 }
 

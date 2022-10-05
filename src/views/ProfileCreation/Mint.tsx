@@ -5,7 +5,7 @@ import { useWeb3React } from '@pancakeswap/wagmi'
 import { useTranslation } from '@pancakeswap/localization'
 import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
 import { useCake, useBunnyFactory } from 'hooks/useContract'
-import { useGetCakeBalance } from 'hooks/useTokenBalance'
+import { useGetDexTokenBalance } from 'hooks/useTokenBalance'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import ApproveConfirmButtons from 'components/ApproveConfirmButtons'
 import { getNftsFromCollectionApi } from 'state/nftMarket/helpers'
@@ -32,7 +32,7 @@ const Mint: React.FC<React.PropsWithChildren> = () => {
   const { reader: cakeContractReader, signer: cakeContractApprover } = useCake()
   const bunnyFactoryContract = useBunnyFactory()
   const { t } = useTranslation()
-  const { balance: cakeBalance, fetchStatus } = useGetCakeBalance()
+  const { balance: cakeBalance, fetchStatus } = useGetDexTokenBalance()
   const hasMinimumCakeRequired = fetchStatus === FetchStatus.Fetched && cakeBalance.gte(MINT_COST)
   const { callWithGasPrice } = useCallWithGasPrice()
 

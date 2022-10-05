@@ -1,5 +1,5 @@
 import { useWeb3React } from '@pancakeswap/wagmi'
-import { ChainId, Currency, CurrencyAmount, Pair, Trade, TradeType } from '@pancakeswap/sdk'
+import { ChainId, Currency, CurrencyAmount, Pair, PRIMARY_CHAIN_ID, Trade, TradeType } from '@pancakeswap/sdk'
 import { ParsedUrlQuery } from 'querystring'
 import { useEffect, useMemo, useState } from 'react'
 import { SLOW_INTERVAL } from 'config/constants'
@@ -17,7 +17,7 @@ import { getChangeForPeriod } from 'utils/getChangeForPeriod'
 import { getLpFeesAndApr } from 'utils/getLpFeesAndApr'
 import useNativeCurrency from 'hooks/useNativeCurrency'
 import { computeSlippageAdjustedAmounts } from 'utils/exchange'
-import { CAKE, USDC } from '@pancakeswap/tokens'
+import { DEX_TOKEN, USDC } from '@pancakeswap/tokens'
 import getLpAddress from 'utils/getLpAddress'
 import { getTokenAddress } from 'views/Swap/components/Chart/utils'
 import tryParseAmount from '@pancakeswap/utils/tryParseAmount'
@@ -243,7 +243,11 @@ export function useDefaultsFromURLSearch():
 
   useEffect(() => {
     if (!chainId || !native) return
-    const parsed = queryParametersToSwapState(query, native.symbol, CAKE[chainId]?.address ?? USDC[chainId]?.address)
+    const parsed = queryParametersToSwapState(
+      query,
+      native.symbol,
+      DEX_TOKEN[chainId]?.address ?? USDC[chainId]?.address,
+    )
 
     dispatch(
       replaceSwapState({
@@ -400,7 +404,7 @@ export const useFetchPairPrices = ({
 
 export const useLPApr = (pair?: Pair) => {
   const { data: poolData } = useSWRImmutable(
-    pair && pair.chainId === ChainId.BSC ? ['LP7dApr', pair.liquidityToken.address] : null,
+    pair && pair.chainId === PRIMARY_CHAIN_ID ? ['LP7dApr', pair.liquidityToken.address] : null,
     async () => {
       const timestampsArray = getDeltaTimestamps()
       const blocks = await getBlocksFromTimestamps(timestampsArray, 'desc', 1000)

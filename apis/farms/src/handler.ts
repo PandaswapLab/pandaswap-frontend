@@ -1,12 +1,12 @@
 import { FixedNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'
 import { getFarmCakeRewardApr, SerializedFarmConfig } from '@pancakeswap/farms'
-import { ChainId, CurrencyAmount, Pair } from '@pancakeswap/sdk'
-import { BUSD, CAKE } from '@pancakeswap/tokens'
+import { ChainId, CurrencyAmount, Pair, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
+import { USDC, DEX_TOKEN } from '@pancakeswap/tokens'
 import { farmFetcher } from './helper'
 import { FarmKV, FarmResult } from './kv'
 import { updateLPsAPR } from './lpApr'
-import { bscProvider, bscTestnetProvider } from './provider'
+import { provider } from './provider'
 
 const pairAbi = [
   {
@@ -34,22 +34,18 @@ const pairAbi = [
   },
 ]
 
-const cakeBusdPairMap = {
-  [ChainId.BSC]: {
-    address: Pair.getAddress(CAKE[ChainId.BSC], BUSD[ChainId.BSC]),
-    tokenA: CAKE[ChainId.BSC],
-    tokenB: BUSD[ChainId.BSC],
-  },
-  [ChainId.BSC_TESTNET]: {
-    address: Pair.getAddress(CAKE[ChainId.BSC_TESTNET], BUSD[ChainId.BSC_TESTNET]),
-    tokenA: CAKE[ChainId.BSC_TESTNET],
-    tokenB: BUSD[ChainId.BSC_TESTNET],
+const pirUsdcPairMap = {
+  [ChainId.PULSECHAIN_TESTNET]: {
+    address: Pair.getAddress(DEX_TOKEN[ChainId.PULSECHAIN_TESTNET], USDC[ChainId.PULSECHAIN_TESTNET]),
+    tokenA: DEX_TOKEN[ChainId.PULSECHAIN_TESTNET],
+    tokenB: USDC[ChainId.PULSECHAIN_TESTNET],
   },
 }
 
 const getCakePrice = async (isTestnet: boolean) => {
-  const pairConfig = cakeBusdPairMap[isTestnet ? ChainId.BSC_TESTNET : ChainId.BSC]
-  const pairContract = new Contract(pairConfig.address, pairAbi, isTestnet ? bscTestnetProvider : bscProvider)
+  const chainId = isTestnet ? ChainId.PULSECHAIN_TESTNET : PRIMARY_CHAIN_ID
+  const pairConfig = pirUsdcPairMap[chainId]
+  const pairContract = new Contract(pairConfig.address, pairAbi, provider[chainId])
   const reserves = await pairContract.getReserves()
   const { reserve0, reserve1 } = reserves
   const { tokenA, tokenB } = pairConfig
@@ -125,7 +121,7 @@ export async function handleLpAprs(chainId: number, farmsConfig?: SerializedFarm
 
 export async function saveLPsAPR(chainId: number, farmsConfig?: SerializedFarmConfig[]) {
   // TODO: add other chains
-  if (chainId === 56) {
+  if (chainId === PRIMARY_CHAIN_ID) {
     let data = farmsConfig
     if (!data) {
       const value = await FarmKV.getFarms(chainId)

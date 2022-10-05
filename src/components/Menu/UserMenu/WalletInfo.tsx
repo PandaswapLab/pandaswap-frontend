@@ -1,11 +1,11 @@
 import { Box, Button, Flex, InjectedModalProps, LinkExternal, Message, Skeleton, Text } from '@pancakeswap/uikit'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { FetchStatus } from 'config/constants/types'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useTranslation } from '@pancakeswap/localization'
 import useAuth from 'hooks/useAuth'
 import useNativeCurrency from 'hooks/useNativeCurrency'
-import { useGetCakeBalance } from 'hooks/useTokenBalance'
+import { useGetDexTokenBalance } from 'hooks/useTokenBalance'
 import { ChainLogo } from 'components/Logo/ChainLogo'
 
 import { getBlockExploreLink, getBlockExploreName } from 'utils'
@@ -26,17 +26,19 @@ interface WalletInfoProps {
 const WalletInfo: React.FC<WalletInfoProps> = ({ hasLowNativeBalance, onDismiss }) => {
   const { t } = useTranslation()
   const { account, chainId, chain } = useActiveWeb3React()
-  const isBSC = chainId === ChainId.BSC
-  const bnbBalance = useBalance({ addressOrName: account, chainId: ChainId.BSC })
-  const nativeBalance = useBalance({ addressOrName: account, enabled: !isBSC })
+  const isPulse = chainId === PRIMARY_CHAIN_ID
+  const bnbBalance = useBalance({ addressOrName: account, chainId: PRIMARY_CHAIN_ID })
+  const nativeBalance = useBalance({ addressOrName: account, enabled: !isPulse })
   const native = useNativeCurrency()
-  const { balance: cakeBalance, fetchStatus: cakeFetchStatus } = useGetCakeBalance()
+  const { balance: cakeBalance, fetchStatus: cakeFetchStatus } = useGetDexTokenBalance()
   const { logout } = useAuth()
 
   const handleLogout = () => {
     onDismiss?.()
     logout()
   }
+
+  console.log('DUPA', chain.name)
 
   return (
     <>
@@ -60,7 +62,7 @@ const WalletInfo: React.FC<WalletInfoProps> = ({ hasLowNativeBalance, onDismiss 
           </Box>
         </Message>
       )}
-      {!isBSC && chain && (
+      {!isPulse && chain && (
         <Box mb="12px">
           <Flex justifyContent="space-between" alignItems="center" mb="8px">
             <Flex bg={COLORS.ETH} borderRadius="16px" pl="4px" pr="8px" py="2px">
@@ -88,13 +90,13 @@ const WalletInfo: React.FC<WalletInfoProps> = ({ hasLowNativeBalance, onDismiss 
       <Box mb="24px">
         <Flex justifyContent="space-between" alignItems="center" mb="8px">
           <Flex bg={COLORS.BNB} borderRadius="16px" pl="4px" pr="8px" py="2px">
-            <ChainLogo chainId={ChainId.BSC} />
+            <ChainLogo chainId={PRIMARY_CHAIN_ID} />
             <Text color="white" ml="4px">
-              BNB Smart Chain
+              PulseChain
             </Text>
           </Flex>
-          <LinkExternal href={getBlockExploreLink(account, 'address', ChainId.BSC)}>
-            {getBlockExploreName(ChainId.BSC)}
+          <LinkExternal href={getBlockExploreLink(account, 'address', PRIMARY_CHAIN_ID)}>
+            {getBlockExploreName(PRIMARY_CHAIN_ID)}
           </LinkExternal>
         </Flex>
         <Flex alignItems="center" justifyContent="space-between">

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Modal, Box, Flex, Text, BinanceIcon, Input } from '@pancakeswap/uikit'
-import { useBNBBusdPrice } from 'hooks/useBUSDPrice'
+import { useNativeUsdPrice } from 'hooks/useBUSDPrice'
 import { multiplyPriceByAmount } from 'utils/prices'
 import { SellingStage } from './types'
 
@@ -42,7 +42,7 @@ interface BnbAmountCellProps {
 }
 
 export const BnbAmountCell: React.FC<React.PropsWithChildren<BnbAmountCellProps>> = ({ bnbAmount }) => {
-  const bnbBusdPrice = useBNBBusdPrice()
+  const bnbBusdPrice = useNativeUsdPrice()
   if (!bnbAmount || bnbAmount === 0) {
     return (
       <Flex alignItems="center" justifyContent="flex-end">

@@ -40,8 +40,8 @@ interface IfoFoldableCardProps {
 const StyledCard = styled(Card)<{ $isCurrent?: boolean }>`
   width: 100%;
   margin: auto;
-  border-top-left-radius: 32px;
-  border-top-right-radius: 32px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 
   ${({ $isCurrent }) =>
     $isCurrent &&
@@ -59,12 +59,12 @@ const StyledCard = styled(Card)<{ $isCurrent?: boolean }>`
   }
 
   ${({ theme }) => theme.mediaQueries.sm} {
-    border-top-left-radius: 32px;
-    border-top-right-radius: 32px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 
     > div {
-      border-top-left-radius: 32px;
-      border-top-right-radius: 32px;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
     }
   }
 `
@@ -77,8 +77,8 @@ const Header = styled(CardHeader)<{ ifoId: string; $isCurrent?: boolean }>`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  border-top-left-radius: 32px;
-  border-top-right-radius: 32px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   background-color: ${({ theme }) => theme.colors.dropdown};
   background-image: ${({ ifoId }) => `url('/images/ifos/${ifoId}-bg.png')`};
   ${({ theme }) => theme.mediaQueries.md} {

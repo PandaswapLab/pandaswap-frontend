@@ -22,7 +22,7 @@ import { wrappedCurrency } from 'utils/wrappedCurrency'
 import LimitOrderDisclaimer from './LimitOrderDisclaimer'
 
 const InfoCardWrapper = styled.div`
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 16px;
   margin-top: 24px;
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};

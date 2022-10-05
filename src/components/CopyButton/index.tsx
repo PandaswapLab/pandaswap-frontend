@@ -18,7 +18,7 @@ const Tooltip = styled.div<{
   font-size: ${({ tooltipFontSize }) => `${tooltipFontSize}px` ?? '100%'};
   background-color: ${({ theme }) => theme.colors.contrast};
   color: ${({ theme }) => theme.colors.invertedContrast};
-  border-radius: 16px;
+  border-radius: 8px;
   opacity: 0.7;
   width: max-content;
 `

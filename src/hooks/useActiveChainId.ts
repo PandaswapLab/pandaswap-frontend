@@ -1,4 +1,4 @@
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { atom, useAtomValue } from 'jotai'
 import { useRouter } from 'next/router'
 import { useDeferredValue } from 'react'
@@ -40,7 +40,7 @@ export const useActiveChainId = () => {
   const queryChainId = useAtomValue(queryChainIdAtom)
 
   const { chain } = useNetwork()
-  const chainId = localChainId ?? chain?.id ?? (queryChainId >= 0 ? ChainId.BSC : undefined)
+  const chainId = localChainId ?? chain?.id ?? (queryChainId >= 0 ? PRIMARY_CHAIN_ID : undefined)
 
   const isNotMatched = useDeferredValue(chain && localChainId && chain.id !== localChainId)
 

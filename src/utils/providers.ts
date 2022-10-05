@@ -1,7 +1,6 @@
 import { StaticJsonRpcProvider } from '@ethersproject/providers'
 
-export const BSC_PROD_NODE = process.env.NEXT_PUBLIC_NODE_PRODUCTION || 'https://bsc.nodereal.io'
-
-export const bscRpcProvider = new StaticJsonRpcProvider(BSC_PROD_NODE)
+// TODO change
+export const mainnetRpcProvider = new StaticJsonRpcProvider('https://rpc.v2b.testnet.pulsechain.com')
 
 export default null

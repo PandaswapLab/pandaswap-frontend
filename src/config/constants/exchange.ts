@@ -1,31 +1,20 @@
 import { ChainId, JSBI, Percent, Token, WNATIVE } from '@pancakeswap/sdk'
 import { BigNumber } from '@ethersproject/bignumber'
-import { bscTokens, bscTestnetTokens, USDC, USDT, BUSD, WBTC_ETH } from '@pancakeswap/tokens'
+import { DEX_TOKEN, USDC, USDT } from '@pancakeswap/tokens'
 import { ChainMap, ChainTokenList } from './types'
 
 export const ROUTER_ADDRESS: ChainMap<string> = {
-  [ChainId.ETHEREUM]: '0xEfF92A263d31888d860bD50809A8D171709b7b1c',
-  [ChainId.RINKEBY]: '0xEfF92A263d31888d860bD50809A8D171709b7b1c',
-  [ChainId.GOERLI]: '0xEfF92A263d31888d860bD50809A8D171709b7b1c',
-  [ChainId.BSC]: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-  [ChainId.BSC_TESTNET]: '0xD99D1c33F9fC3444f8101754aBC46c52416550D1',
+  [ChainId.PULSECHAIN_TESTNET]: '0x8DD4e339140CBd8a2C67c310413e78660F3008FC',
 }
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  [ChainId.ETHEREUM]: [WNATIVE[ChainId.ETHEREUM], USDC[ChainId.ETHEREUM], USDT[ChainId.ETHEREUM], WBTC_ETH],
-  [ChainId.RINKEBY]: [WNATIVE[ChainId.GOERLI], USDC[ChainId.GOERLI], BUSD[ChainId.GOERLI]],
-  [ChainId.GOERLI]: [WNATIVE[ChainId.RINKEBY], USDC[ChainId.RINKEBY], BUSD[ChainId.RINKEBY]],
-  [ChainId.BSC]: [
-    bscTokens.wbnb,
-    bscTokens.cake,
-    bscTokens.busd,
-    bscTokens.usdt,
-    bscTokens.btcb,
-    bscTokens.eth,
-    bscTokens.usdc,
+  [ChainId.PULSECHAIN_TESTNET]: [
+    WNATIVE[ChainId.PULSECHAIN_TESTNET],
+    USDC[ChainId.PULSECHAIN_TESTNET],
+    USDC[ChainId.PULSECHAIN_TESTNET],
+    DEX_TOKEN[ChainId.PULSECHAIN_TESTNET],
   ],
-  [ChainId.BSC_TESTNET]: [bscTestnetTokens.wbnb, bscTestnetTokens.cake, bscTestnetTokens.busd],
 }
 
 /**
@@ -33,10 +22,10 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  * @example { [WBTC.address]: [renBTC], [renBTC.address]: [WBTC] }
  */
 export const ADDITIONAL_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
-  [ChainId.BSC]: {
-    // SNFTS-SFUND
-    [bscTokens.snfts.address]: [bscTokens.sfund],
-  },
+  // [ChainId.BSC]: {
+  //   // SNFTS-SFUND
+  //   [bscTokens.snfts.address]: [bscTokens.sfund],
+  // },
 }
 
 /**
@@ -45,37 +34,35 @@ export const ADDITIONAL_BASES: { [chainId in ChainId]?: { [tokenAddress: string]
  * @example [AMPL.address]: [DAI, WNATIVE[ChainId.BSC]]
  */
 export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
-  [ChainId.BSC]: {},
+  [ChainId.PULSECHAIN_TESTNET]: {},
 }
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  [ChainId.ETHEREUM]: [USDC[ChainId.ETHEREUM], USDT[ChainId.ETHEREUM], WNATIVE[ChainId.ETHEREUM], WBTC_ETH],
-  [ChainId.RINKEBY]: [USDC[ChainId.RINKEBY], WNATIVE[ChainId.RINKEBY], BUSD[ChainId.RINKEBY]],
-  [ChainId.GOERLI]: [USDC[ChainId.GOERLI], WNATIVE[ChainId.GOERLI], BUSD[ChainId.GOERLI]],
-  [ChainId.BSC]: [bscTokens.busd, bscTokens.cake, bscTokens.btcb],
-  [ChainId.BSC_TESTNET]: [bscTestnetTokens.wbnb, bscTestnetTokens.cake, bscTestnetTokens.busd],
+  [ChainId.PULSECHAIN_TESTNET]: [
+    USDC[ChainId.PULSECHAIN_TESTNET],
+    USDT[ChainId.PULSECHAIN_TESTNET],
+    WNATIVE[ChainId.PULSECHAIN_TESTNET],
+    DEX_TOKEN[ChainId.PULSECHAIN_TESTNET],
+  ],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
-  [ChainId.ETHEREUM]: [USDC[ChainId.ETHEREUM], WNATIVE[ChainId.ETHEREUM], USDT[ChainId.ETHEREUM], WBTC_ETH],
-  [ChainId.RINKEBY]: [USDC[ChainId.RINKEBY], WNATIVE[ChainId.RINKEBY], BUSD[ChainId.RINKEBY]],
-  [ChainId.GOERLI]: [USDC[ChainId.GOERLI], WNATIVE[ChainId.GOERLI], BUSD[ChainId.GOERLI]],
-  [ChainId.BSC]: [bscTokens.wbnb, bscTokens.dai, bscTokens.busd, bscTokens.usdt, bscTokens.cake],
-  [ChainId.BSC_TESTNET]: [bscTestnetTokens.wbnb, bscTestnetTokens.cake, bscTestnetTokens.busd],
+  [ChainId.PULSECHAIN_TESTNET]: [
+    USDC[ChainId.PULSECHAIN_TESTNET],
+    WNATIVE[ChainId.PULSECHAIN_TESTNET],
+    USDT[ChainId.PULSECHAIN_TESTNET],
+    DEX_TOKEN[ChainId.PULSECHAIN_TESTNET],
+  ],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
-  [ChainId.ETHEREUM]: [
-    [WNATIVE[ChainId.ETHEREUM], USDC[ChainId.ETHEREUM]],
-    [WBTC_ETH, WNATIVE[ChainId.ETHEREUM]],
-    [WNATIVE[ChainId.ETHEREUM], USDT[ChainId.ETHEREUM]],
-  ],
-  [ChainId.BSC]: [
-    [bscTokens.cake, bscTokens.wbnb],
-    [bscTokens.busd, bscTokens.usdt],
-    [bscTokens.dai, bscTokens.usdt],
+  [ChainId.PULSECHAIN_TESTNET]: [
+    [WNATIVE[ChainId.PULSECHAIN_TESTNET], USDC[ChainId.PULSECHAIN_TESTNET]],
+    [DEX_TOKEN[ChainId.PULSECHAIN_TESTNET], WNATIVE[ChainId.PULSECHAIN_TESTNET]],
+    [WNATIVE[ChainId.PULSECHAIN_TESTNET], USDT[ChainId.PULSECHAIN_TESTNET]],
+    [USDC[ChainId.PULSECHAIN_TESTNET], USDT[ChainId.PULSECHAIN_TESTNET]],
   ],
 }
 

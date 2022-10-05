@@ -65,11 +65,12 @@ import { CommonBasesType } from '../../components/SearchModal/types'
 
 const BorderCard = styled.div`
   border: solid 1px ${({ theme }) => theme.colors.cardBorder};
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 16px;
 `
 
-const zapSupportedChainId = [ChainId.BSC, ChainId.BSC_TESTNET]
+// TODO add support
+const zapSupportedChainId = []
 
 export default function RemoveLiquidity({ currencyA, currencyB, currencyIdA, currencyIdB }) {
   const router = useRouter()

@@ -21,13 +21,13 @@ it("renders correctly", () => {
       background-color: var(--colors-input);
       box-shadow: var(--shadows-inset);
       overflow: hidden;
-      border-radius: 32px;
+      border-radius: 16px;
       height: 16px;
     }
 
     .c0 .c1 {
-      border-top-left-radius: 32px;
-      border-bottom-left-radius: 32px;
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
     }
 
     <div

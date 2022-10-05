@@ -1,5 +1,5 @@
 import { useTranslation } from '@pancakeswap/localization'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { ArrowForwardIcon, Button, Grid, Message, MessageText, Modal, Text } from '@pancakeswap/uikit'
 import { FlexGap } from 'components/Layout/Flex'
 import { ChainLogo } from 'components/Logo/ChainLogo'
@@ -17,7 +17,7 @@ export function WrongNetworkModal({ currentChain, onDismiss }: { currentChain: C
   const { logout } = useAuth()
   const { isConnected } = useAccount()
   const [, setSessionChainId] = useSessionChainId()
-  const chainId = currentChain.id || ChainId.BSC
+  const chainId = currentChain.id || PRIMARY_CHAIN_ID
   const { t } = useTranslation()
 
   const switchText = t('Switch to %network%', { network: currentChain.name })

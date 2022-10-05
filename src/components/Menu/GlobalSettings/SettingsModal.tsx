@@ -9,7 +9,7 @@ import {
   useUserSingleHopOnly,
   useZapModeManager,
 } from 'state/user/hooks'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { SUPPORT_ZAP } from 'config/constants/supportChains'
 import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
 import { useActiveChainId } from 'hooks/useActiveChainId'
@@ -134,7 +134,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
                 {t('Swaps & Liquidity')}
               </Text>
               <Flex justifyContent="space-between" alignItems="center" mb="24px">
-                {chainId === ChainId.BSC && <GasSettings />}
+                {chainId === PRIMARY_CHAIN_ID && <GasSettings />}
               </Flex>
               <TransactionSettings />
             </Flex>

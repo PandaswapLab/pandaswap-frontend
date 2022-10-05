@@ -4,14 +4,11 @@ import { Address } from 'config/constants/types'
 import { VaultKey } from 'state/types'
 
 export const getAddress = (address: Address, chainId?: number): string => {
-  return address[chainId] ? address[chainId] : address[ChainId.BSC]
+  return address[chainId] ? address[chainId] : address[ChainId.PULSECHAIN_TESTNET]
 }
 
 export const getMasterChefAddress = (chainId?: number) => {
   return getAddress(addresses.masterChef, chainId)
-}
-export const getMasterChefV1Address = () => {
-  return getAddress(addresses.masterChefV1)
 }
 export const getMulticallAddress = (chainId?: number) => {
   return getAddress(addresses.multiCall, chainId)

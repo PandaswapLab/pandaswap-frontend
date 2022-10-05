@@ -5,7 +5,7 @@ const StyledBannerImageWrapper = styled.div`
   flex: none;
   position: relative;
   width: 100%;
-  border-radius: 32px;
+  border-radius: 8px;
   height: 123px;
   overflow: hidden;
 
