@@ -23,10 +23,10 @@ export enum Rounding {
 }
 
 export const FACTORY_ADDRESS_MAP: Record<number, string> = {
-  [ChainId.PULSECHAIN_TESTNET]: '0x7927dbE1a75Bc0cAE56A730d7865F7dAb1A30149',
+  [ChainId.PULSECHAIN_TESTNET]: '0x69E56257C08d2B653d5cdace5A790D53b98D7eb1',
 }
 export const INIT_CODE_HASH_MAP: Record<number, string> = {
-  [ChainId.PULSECHAIN_TESTNET]: '0x820cec090cc9c940dcb65b09342b401c451dd8f4901ae132f5249c0051fef8f0',
+  [ChainId.PULSECHAIN_TESTNET]: '0x4f8dca6783c54b694f8befd15fa75d19c1867410eb30b8fe462b15a8cc041f84',
 }
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)

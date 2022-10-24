@@ -148,7 +148,7 @@ export default function CurrencyInputPanel({
       <Flex alignItems="center" justifyContent="space-between">
         <Flex>
           {beforeButton}
-          <CurrencySelectButton
+          {/* <CurrencySelectButton
             zapStyle={zapStyle}
             className="open-currency-select-button"
             selected={!!currency}
@@ -180,8 +180,8 @@ export default function CurrencyInputPanel({
               )}
               {!disableCurrencySelect && <ChevronDownIcon />}
             </Flex>
-          </CurrencySelectButton>
-          {token && tokenAddress ? (
+          </CurrencySelectButton> */}
+          {/* {token && tokenAddress ? (
             <Flex style={{ gap: '4px' }} ml="4px" alignItems="center">
               <CopyButton
                 width="16px"
@@ -203,24 +203,45 @@ export default function CurrencyInputPanel({
                 tokenLogo={token instanceof WrappedTokenInfo ? token.logoURI : undefined}
               />
             </Flex>
-          ) : null}
+          ) : null} */}
         </Flex>
-        {account && (
-          <Text
-            onClick={!disabled && onMax}
-            color="textSubtle"
-            fontSize="14px"
-            style={{ display: 'inline', cursor: 'pointer' }}
-          >
-            {!hideBalance && !!currency
-              ? t('Balance: %balance%', { balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading') })
-              : ' -'}
-          </Text>
-        )}
       </Flex>
       <InputPanel>
-        <Container as="label" zapStyle={zapStyle} error={error}>
+        <Container zapStyle={zapStyle} error={error}>
           <LabelRow>
+            <CurrencySelectButton
+              zapStyle={zapStyle}
+              className="open-currency-select-button"
+              selected={!!currency}
+              onClick={() => {
+                if (!disableCurrencySelect) {
+                  onPresentCurrencyModal()
+                }
+              }}
+            >
+              <Flex alignItems="center" justifyContent="space-between">
+                {pair ? (
+                  <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={16} margin />
+                ) : currency ? (
+                  <CurrencyLogo currency={currency} size="24px" style={{ marginRight: '8px' }} />
+                ) : null}
+                {pair ? (
+                  <Text id="pair" bold>
+                    {pair?.token0.symbol}:{pair?.token1.symbol}
+                  </Text>
+                ) : (
+                  <Text id="pair" bold>
+                    {(currency && currency.symbol && currency.symbol.length > 20
+                      ? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
+                          currency.symbol.length - 5,
+                          currency.symbol.length,
+                        )}`
+                      : currency?.symbol) || t('Select a currency')}
+                  </Text>
+                )}
+                {!disableCurrencySelect && <ChevronDownIcon />}
+              </Flex>
+            </CurrencySelectButton>
             <NumericalInput
               error={error}
               disabled={disabled}
@@ -240,26 +261,17 @@ export default function CurrencyInputPanel({
             )}
             {account && currency && selectedCurrencyBalance?.greaterThan(0) && !disabled && label !== 'To' && (
               <Flex alignItems="right" justifyContent="right">
-                {showQuickInputButton &&
-                  onPercentInput &&
-                  [25, 50, 75].map((percent) => (
-                    <Button
-                      key={`btn_quickCurrency${percent}`}
-                      onClick={() => {
-                        onPercentInput(percent)
-                      }}
-                      scale="xs"
-                      mr="5px"
-                      variant="secondary"
-                      style={{ textTransform: 'uppercase' }}
-                    >
-                      {percent}%
-                    </Button>
-                  ))}
-                {showMaxButton && (
-                  <Button onClick={onMax} scale="xs" variant="secondary" style={{ textTransform: 'uppercase' }}>
-                    {t('Max')}
-                  </Button>
+                {account && (
+                  <Text
+                    onClick={!disabled && onMax}
+                    color="textSubtle"
+                    fontSize="14px"
+                    style={{ display: 'inline', cursor: 'pointer' }}
+                  >
+                    {!hideBalance && !!currency
+                      ? t('Balance: %balance%', { balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading') })
+                      : ' -'}
+                  </Text>
                 )}
               </Flex>
             )}

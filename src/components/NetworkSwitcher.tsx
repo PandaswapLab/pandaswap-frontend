@@ -1,5 +1,4 @@
 import { useTranslation } from '@pancakeswap/localization'
-import { ChainId, NATIVE } from '@pancakeswap/sdk'
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -13,7 +12,7 @@ import {
   UserMenuItem,
   useTooltip,
 } from '@pancakeswap/uikit'
-import { ChainId, NATIVE, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
+import { NATIVE, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { useActiveChainId, useLocalNetworkChain } from 'hooks/useActiveChainId'
 import { useNetworkConnectorUpdater } from 'hooks/useActiveWeb3React'
 import { useHover } from 'hooks/useHover'
@@ -24,6 +23,7 @@ import { useRouter } from 'next/router'
 import { chains } from 'utils/wagmi'
 import { useNetwork } from 'wagmi'
 import { ChainLogo } from './Logo/ChainLogo'
+import { useWeb3React } from '@pancakeswap/wagmi'
 
 const NetworkSelect = ({ switchNetwork, chainId }) => {
   const { t } = useTranslation()

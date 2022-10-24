@@ -219,7 +219,7 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
       <>
         <CurrencyInputHeader
           title={t('Swap')}
-          subtitle={t('Trade tokens in an instant')}
+          // subtitle={t('Trade tokens in an instant')}
           setIsChartDisplayed={setIsChartDisplayed}
           isChartDisplayed={isChartDisplayed}
           isChartSupported={isChartSupported}

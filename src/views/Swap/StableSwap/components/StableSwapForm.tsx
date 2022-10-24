@@ -213,7 +213,7 @@ export default function StableSwapForm({ setIsChartDisplayed, isChartDisplayed }
             />
           </Flex>
         }
-        subtitle={t('Trade tokens in an instant')}
+        // subtitle={t('Trade tokens in an instant')}
         setIsChartDisplayed={setIsChartDisplayed}
         isChartDisplayed={isChartDisplayed}
         hasAmount={hasAmount}

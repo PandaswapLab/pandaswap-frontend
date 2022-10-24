@@ -4,7 +4,7 @@ import { DEX_TOKEN, USDC, USDT } from '@pancakeswap/tokens'
 import { ChainMap, ChainTokenList } from './types'
 
 export const ROUTER_ADDRESS: ChainMap<string> = {
-  [ChainId.PULSECHAIN_TESTNET]: '0x8DD4e339140CBd8a2C67c310413e78660F3008FC',
+  [ChainId.PULSECHAIN_TESTNET]: '0x493bd2c446A6aDd2a922e712d05F73A9df6CA980',
 }
 
 // used to construct intermediary pairs for trading

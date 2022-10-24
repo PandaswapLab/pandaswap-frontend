@@ -19,7 +19,7 @@ import { SettingsMode } from '../../../components/Menu/GlobalSettings/types'
 
 interface Props {
   title: string | ReactElement
-  subtitle: string
+  subtitle?: string
   noConfig?: boolean
   setIsChartDisplayed?: React.Dispatch<React.SetStateAction<boolean>>
   isChartDisplayed?: boolean
@@ -31,7 +31,8 @@ interface Props {
 const CurrencyInputContainer = styled(Flex)`
   flex-direction: column;
   align-items: center;
-  padding: 24px;
+  padding: 12px 12px;
+  padding-left: 16px;
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
 `
@@ -71,19 +72,21 @@ const CurrencyInputHeader: React.FC<React.PropsWithChildren<Props>> = ({
           <NotificationDot show={expertMode}>
             <GlobalSettings color="textSubtle" mr="0" mode={SettingsMode.SWAP_LIQUIDITY} />
           </NotificationDot>
-          <IconButton onClick={onPresentTransactionsModal} variant="text" scale="sm">
+          {/* <IconButton onClick={onPresentTransactionsModal} variant="text" scale="sm">
             <HistoryIcon color="textSubtle" width="24px" />
           </IconButton>
           <IconButton variant="text" scale="sm" onClick={handleOnClick}>
             <RefreshIcon disabled={!hasAmount} color="textSubtle" width="27px" />
-          </IconButton>
+          </IconButton> */}
         </Flex>
       </Flex>
-      <Flex alignItems="center" alignSelf="flex-start">
-        <Text color="textSubtle" fontSize="14px">
-          {subtitle}
-        </Text>
-      </Flex>
+      {subtitle && (
+        <Flex alignItems="center" alignSelf="flex-start">
+          <Text color="textSubtle" fontSize="14px">
+            {subtitle}
+          </Text>
+        </Flex>
+      )}
     </CurrencyInputContainer>
   )
 }

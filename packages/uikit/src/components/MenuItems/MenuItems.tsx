@@ -24,6 +24,7 @@ const MenuItems: React.FC<React.PropsWithChildren<MenuItemsProps>> = ({
             key={`${label}#${href}`}
             items={menuItems}
             py={1}
+            mx={2}
             activeItem={activeSubItem}
             isDisabled={disabled}
           >
