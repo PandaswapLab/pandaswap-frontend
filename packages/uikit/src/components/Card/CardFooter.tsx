@@ -9,7 +9,7 @@ const CardFooter = styled.div<CardFooterProps>`
 `;
 
 CardFooter.defaultProps = {
-  p: "24px",
+  p: "16px",
 };
 
 export default CardFooter;

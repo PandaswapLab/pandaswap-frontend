@@ -18,7 +18,7 @@ interface Props {
 const AppHeaderContainer = styled(Flex)`
   align-items: center;
   justify-content: space-between;
-  padding: 24px;
+  padding: 12px 12px;
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
 `
@@ -52,7 +52,6 @@ const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, 
                 <NotificationDot show={expertMode}>
                   <GlobalSettings mode={SettingsMode.SWAP_LIQUIDITY} />
                 </NotificationDot>
-                <Transactions />
               </Flex>
             )}
           </Flex>

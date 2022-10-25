@@ -1,5 +1,5 @@
 import { Button, Modal, Text, Grid, Box, Message, MessageText } from '@pancakeswap/uikit'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import Image from 'next/future/image'
 import { useSwitchNetwork } from 'hooks/useSwitchNetwork'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -40,7 +40,7 @@ export function PageNetworkSupportModal() {
   return (
     <Modal title={title || t('Check your network')} hideCloseButton headerBackground="gradientCardHeader">
       <Grid style={{ gap: '16px' }} maxWidth="360px">
-        <Text bold>{t('It’s a BNB Smart Chain only feature')}</Text>
+        <Text bold>{t('It’s a Pulse Chain only feature')}</Text>
 
         {image && (
           <Box mx="auto" my="8px" position="relative" width="100%" minHeight="250px">
@@ -49,7 +49,7 @@ export function PageNetworkSupportModal() {
         )}
         <Text small>
           {t(
-            'Our Pools, Limit, Trading Competition, Prediction, Lottery and NFTs features are currently available only on BNB Chain! Come over and join the community in the fun!',
+            'Our Pools features are currently available only on PulseChain! Come over and join the community in the fun!',
           )}
         </Text>
         {canSwitch ? (
@@ -58,7 +58,7 @@ export function PageNetworkSupportModal() {
             isLoading={isLoading}
             onClick={() => switchNetworkAsync(PRIMARY_CHAIN_ID)}
           >
-            {t('Switch to %chain%', { chain: 'BNB Smart Chain' })}
+            {t('Switch to %chain%', { chain: 'PulseChain' })}
           </Button>
         ) : (
           <Message variant="danger">

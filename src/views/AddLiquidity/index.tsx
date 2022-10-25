@@ -32,7 +32,7 @@ import { ROUTER_ADDRESS } from 'config/constants/exchange'
 import { LightCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Layout/Column'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
-import { AppHeader, AppBody } from '../../components/App'
+import { AppHeader, AppBodyWide } from '../../components/App'
 import { MinimalPositionCard } from '../../components/PositionCard'
 import { RowBetween, RowFixed } from '../../components/Layout/Row'
 import ConnectWalletButton from '../../components/ConnectWalletButton'
@@ -579,7 +579,7 @@ export default function AddLiquidity({ currencyA, currencyB }) {
 
   return (
     <Page>
-      <AppBody>
+      <AppBodyWide>
         {!showAddLiquidity && (
           <ChoosePair
             error={error}
@@ -882,7 +882,7 @@ export default function AddLiquidity({ currencyA, currencyB }) {
             </CardBody>
           </>
         )}
-      </AppBody>
+      </AppBodyWide>
       {!(addIsUnsupported || addIsWarning) ? (
         pair && !noLiquidity && pairState !== PairState.INVALID ? (
           <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>

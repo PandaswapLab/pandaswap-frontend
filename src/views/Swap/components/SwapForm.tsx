@@ -226,7 +226,7 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
           hasAmount={hasAmount}
           onRefreshPrice={onRefreshPrice}
         />
-        <Wrapper id="swap-page" style={{ minHeight: '412px' }}>
+        <Wrapper id="swap-page" style={{ minHeight: '360px' }}>
           <AutoColumn gap="sm">
             <CurrencyInputPanel
               label={independentField === Field.OUTPUT && !showWrap && trade ? t('From (estimated)') : t('From')}
@@ -330,7 +330,7 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
               </AutoColumn>
             )}
           </AutoColumn>
-          <Box mt="0.25rem">
+          <Box mt="1rem">
             <SwapCommitButton
               swapIsUnsupported={swapIsUnsupported}
               account={account}

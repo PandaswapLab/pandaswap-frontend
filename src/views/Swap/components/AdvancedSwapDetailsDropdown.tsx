@@ -7,7 +7,6 @@ const AdvancedDetailsFooter = styled.div<{ show: boolean }>`
   padding-top: 16px;
   padding-bottom: 16px;
   width: 100%;
-  max-width: 400px;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.invertedContrast};
 
