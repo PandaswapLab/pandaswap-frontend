@@ -9,6 +9,7 @@ declare global {
       isMathWallet?: true
       isTrustWallet?: true
       isBlocto?: true
+      isTokenPocket?: true
     }
     BinanceChain?: {
       bnbSign?: (address: string, message: string) => Promise<{ publicKey: string; signature: string }>
