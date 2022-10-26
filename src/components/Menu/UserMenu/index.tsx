@@ -77,7 +77,7 @@ const UserMenu = () => {
           hasProfile={hasProfile}
           disabled={isWrongNetwork || chainId !== PRIMARY_CHAIN_ID}
         />
-        <UserMenuDivider />
+        {/* <UserMenuDivider /> */}
         <UserMenuItem as="button" onClick={logout}>
           <Flex alignItems="center" justifyContent="space-between" width="100%">
             {t('Disconnect')}

@@ -226,7 +226,7 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
           hasAmount={hasAmount}
           onRefreshPrice={onRefreshPrice}
         />
-        <Wrapper id="swap-page" style={{ minHeight: '360px' }}>
+        <Wrapper id="swap-page" style={{ minHeight: '330px' }}>
           <AutoColumn gap="sm">
             <CurrencyInputPanel
               label={independentField === Field.OUTPUT && !showWrap && trade ? t('From (estimated)') : t('From')}
@@ -245,7 +245,7 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
             />
 
             <AutoColumn justify="space-between">
-              <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
+              <AutoRow justify={'center'} style={{ padding: '0 1rem' }}>
                 <SwitchIconButton
                   variant="light"
                   scale="sm"
@@ -265,11 +265,11 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
                     color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? 'primary' : 'text'}
                   />
                 </SwitchIconButton>
-                {recipient === null && !showWrap && isExpertMode ? (
+                {/* {recipient === null && !showWrap && isExpertMode ? (
                   <Button variant="text" id="add-recipient-button" onClick={() => onChangeRecipient('')}>
                     {t('+ Add a send (optional)')}
                   </Button>
-                ) : null}
+                ) : null} */}
               </AutoRow>
             </AutoColumn>
             <CurrencyInputPanel
@@ -303,7 +303,7 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
               </>
             ) : null}
 
-            {showWrap ? null : (
+            {/* {showWrap ? null : (
               <AutoColumn gap="7px" style={{ padding: '0 16px' }}>
                 <RowBetween align="center">
                   {Boolean(trade) && (
@@ -328,7 +328,7 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
                   </Text>
                 </RowBetween>
               </AutoColumn>
-            )}
+            )} */}
           </AutoColumn>
           <Box mt="1rem">
             <SwapCommitButton
@@ -354,7 +354,9 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
           </Box>
         </Wrapper>
         {!swapIsUnsupported ? (
-          trade && <AdvancedSwapDetailsDropdown trade={trade} />
+          trade && (
+            <AdvancedSwapDetailsDropdown trade={trade} showInverted={showInverted} setShowInverted={setShowInverted} />
+          )
         ) : (
           <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} />
         )}

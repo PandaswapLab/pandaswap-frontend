@@ -1,5 +1,5 @@
 import { Trade, TradeType, Currency } from '@pancakeswap/sdk'
-import { Text } from '@pancakeswap/uikit'
+import { Skeleton, Text } from '@pancakeswap/uikit'
 import { Field } from 'state/swap/actions'
 import { useTranslation } from '@pancakeswap/localization'
 import { useUserSlippageTolerance } from 'state/user/hooks'
@@ -10,13 +10,18 @@ import { TOTAL_FEE, LP_HOLDERS_FEE, TREASURY_FEE, BUYBACK_FEE } from 'config/con
 import { RowBetween, RowFixed } from 'components/Layout/Row'
 import FormattedPriceImpact from './FormattedPriceImpact'
 import SwapRoute from './SwapRoute'
+import TradePrice from './TradePrice'
 
 function TradeSummary({
   trade,
   allowedSlippage,
+  showInverted,
+  setShowInverted,
 }: {
   trade: Trade<Currency, Currency, TradeType>
   allowedSlippage: number
+  showInverted: boolean
+  setShowInverted: (showInverted: boolean) => void
 }) {
   const { t } = useTranslation()
   const { priceImpactWithoutFee, realizedLPFee } = computeTradePriceBreakdown(trade)
@@ -30,6 +35,26 @@ function TradeSummary({
 
   return (
     <AutoColumn style={{ padding: '0 16px' }}>
+      <RowBetween align="center">
+        <RowFixed>
+          <Text fontSize="14px" color="textSubtle">
+            {t('Price')}
+          </Text>
+        </RowFixed>
+        <RowFixed>
+          <TradePrice price={trade?.executionPrice} showInverted={showInverted} setShowInverted={setShowInverted} />
+        </RowFixed>
+      </RowBetween>
+      <RowBetween align="center">
+        <RowFixed>
+          <Text fontSize="14px" color="textSubtle">
+            {t('Slippage Tolerance')}
+          </Text>
+        </RowFixed>
+        <RowFixed>
+          <Text fontSize="14px">{allowedSlippage / 100}%</Text>
+        </RowFixed>
+      </RowBetween>
       <RowBetween>
         <RowFixed>
           <Text fontSize="14px" color="textSubtle">
@@ -94,9 +119,11 @@ function TradeSummary({
 
 export interface AdvancedSwapDetailsProps {
   trade?: Trade<Currency, Currency, TradeType>
+  showInverted: boolean
+  setShowInverted: (showInverted: boolean) => void
 }
 
-export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
+export function AdvancedSwapDetails({ trade, ...other }: AdvancedSwapDetailsProps) {
   const { t } = useTranslation()
   const [allowedSlippage] = useUserSlippageTolerance()
 
@@ -106,7 +133,7 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
     <AutoColumn gap="0px">
       {trade && (
         <>
-          <TradeSummary trade={trade} allowedSlippage={allowedSlippage} />
+          <TradeSummary trade={trade} allowedSlippage={allowedSlippage} {...other} />
           {showRoute && (
             <>
               <RowBetween style={{ padding: '0 16px' }}>
