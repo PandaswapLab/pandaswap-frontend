@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { ChainId, Currency } from '@pancakeswap/sdk'
+import { Currency } from '@pancakeswap/sdk'
 import { Box, Flex, BottomDrawer, useMatchBreakpoints } from '@pancakeswap/uikit'
 import Footer from 'components/Menu/Footer'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -66,7 +66,7 @@ export default function Swap() {
   const isAccessTokenSupported = useMemo(() => ACCESS_TOKEN_SUPPORT_CHAIN_IDS.includes(chainId), [chainId])
 
   return (
-    <Page removePadding={isChartExpanded} hideFooterOnDesktop={true}>
+    <Page removePadding={isChartExpanded} hideFooterOnDesktop>
       <Flex width="100%" justifyContent="center" position="relative">
         {!isMobile && isChartSupported && (
           <PriceChartContainer

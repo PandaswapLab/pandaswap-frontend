@@ -1,7 +1,7 @@
 import { Flex, Heading, Skeleton, Text } from '@pancakeswap/uikit'
 import Balance from 'components/Balance'
 import cakeAbi from 'config/abi/cake.json'
-import { bscTokens } from '@pancakeswap/tokens'
+import { primaryTokens } from '@pancakeswap/tokens'
 import { useTranslation } from '@pancakeswap/localization'
 import useIntersectionObserver from 'hooks/useIntersectionObserver'
 import { useEffect, useState } from 'react'
@@ -88,9 +88,9 @@ const CakeDataRow = () => {
   } = useSWR(
     loadData ? ['cakeDataRow'] : null,
     async () => {
-      const totalSupplyCall = { address: bscTokens.cake.address, name: 'totalSupply' }
+      const totalSupplyCall = { address: primaryTokens.pir.address, name: 'totalSupply' }
       const burnedTokenCall = {
-        address: bscTokens.cake.address,
+        address: primaryTokens.pir.address,
         name: 'balanceOf',
         params: ['0x000000000000000000000000000000000000dEaD'],
       }

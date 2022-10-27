@@ -22,8 +22,8 @@ import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { chains } from 'utils/wagmi'
 import { useNetwork } from 'wagmi'
-import { ChainLogo } from './Logo/ChainLogo'
 import { useWeb3React } from '@pancakeswap/wagmi'
+import { ChainLogo } from './Logo/ChainLogo'
 
 const NetworkSelect = ({ switchNetwork, chainId }) => {
   const { t } = useTranslation()

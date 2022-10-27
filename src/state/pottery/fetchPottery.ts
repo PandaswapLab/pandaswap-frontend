@@ -4,7 +4,7 @@ import potteryVaultAbi from 'config/abi/potteryVaultAbi.json'
 import { getPotteryDrawAddress } from 'utils/addressHelpers'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { PotteryDepositStatus } from 'state/types'
-import { bscTokens } from '@pancakeswap/tokens'
+import { primaryTokens } from '@pancakeswap/tokens'
 import { getPotteryDrawContract, getBep20Contract } from 'utils/contractHelpers'
 import { request, gql } from 'graphql-request'
 import { GRAPH_API_POTTERY } from 'config/constants/endpoints'
@@ -75,7 +75,7 @@ export const fetchPublicPotteryValue = async (potteryVaultAddress: string) => {
 
 export const fetchTotalLockedValue = async (potteryVaultAddress: string) => {
   try {
-    const contract = getBep20Contract(bscTokens.cake.address)
+    const contract = getBep20Contract(primaryTokens.pir.address)
     const totalLocked = await contract.balanceOf(potteryVaultAddress)
 
     return {

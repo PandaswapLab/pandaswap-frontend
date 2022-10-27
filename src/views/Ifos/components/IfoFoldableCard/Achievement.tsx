@@ -12,7 +12,7 @@ import {
   Link,
   TelegramIcon,
 } from '@pancakeswap/uikit'
-import { bscTokens } from '@pancakeswap/tokens'
+import { primaryTokens } from '@pancakeswap/tokens'
 import { useTranslation } from '@pancakeswap/localization'
 import { PublicIfoData } from 'views/Ifos/types'
 import { Ifo } from 'config/constants/types'
@@ -122,7 +122,7 @@ const IfoAchievement: React.FC<React.PropsWithChildren<Props>> = ({ ifo, publicI
             <Text color="textSubtle" fontSize="12px">
               {t('Commit ~%amount% %symbol% in total to earn!', {
                 amount: minLpForAchievement,
-                symbol: ifo.currency === bscTokens.cake ? 'CAKE' : 'LP',
+                symbol: ifo.currency === primaryTokens.pir ? 'CAKE' : 'LP',
               })}
             </Text>
           ) : (

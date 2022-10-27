@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ChainId } from '@pancakeswap/sdk'
+import { ChainId, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useActiveIfoWithBlocks } from 'hooks/useActiveIfoWithBlocks'
 import { useCurrentBlock } from 'state/block/hooks'
@@ -18,7 +18,7 @@ export const useMenuItemsStatus = (): Record<string, string> => {
   const votingStatus = useVotingStatus()
 
   const ifoStatus =
-    currentBlock && activeIfo && activeIfo.endBlock > currentBlock && chainId === ChainId.BSC
+    currentBlock && activeIfo && activeIfo.endBlock > currentBlock && chainId === PRIMARY_CHAIN_ID
       ? getStatus(currentBlock, activeIfo.startBlock, activeIfo.endBlock)
       : null
 

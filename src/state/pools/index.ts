@@ -20,6 +20,7 @@ import { multicallv2 } from 'utils/multicall'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { mainnetRpcProvider } from 'utils/providers'
 import { getPoolsPriceHelperLpFiles } from 'config/constants/priceHelperLps/index'
+import { DEX_TOKEN } from '@pancakeswap/tokens'
 import fetchFarms from '../farms/fetchFarms'
 import getFarmsPrices from '../farms/getFarmsPrices'
 import {
@@ -39,7 +40,6 @@ import { getTokenPricesFromFarm } from './helpers'
 import { resetUserState } from '../global/actions'
 import { fetchUserIfoCredit, fetchPublicIfoData } from './fetchUserIfo'
 import { fetchVaultUser, fetchFlexibleSideVaultUser } from './fetchVaultUser'
-import { DEX_TOKEN } from '@pancakeswap/tokens'
 import { PRIMARY_CHAIN_ID } from '../../../packages/swap-sdk/src/constants'
 
 export const initialPoolVaultState = Object.freeze({

@@ -16,8 +16,9 @@ export const InfoPageLayout = ({ children }) => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    if (account && chainId === ChainId.BSC && router.query.chainName === 'eth') window.location.href = '/info'
-    if (account && chainId === ChainId.ETHEREUM && router.query.chainName !== 'eth') window.location.href = '/info/eth'
+    // TODO: add info
+    // if (account && chainId === ChainId.BSC && router.query.chainName === 'eth') window.location.href = '/info'
+    // if (account && chainId === ChainId. && router.query.chainName !== 'eth') window.location.href = '/info/eth'
   }, [chainId, account, chainName, router])
 
   const isStableSwap = router.query.type === 'stableSwap'

@@ -245,7 +245,7 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
             />
 
             <AutoColumn justify="space-between">
-              <AutoRow justify={'center'} style={{ padding: '0 1rem' }}>
+              <AutoRow justify="center" style={{ padding: '0 1rem' }}>
                 <SwitchIconButton
                   variant="light"
                   scale="sm"
