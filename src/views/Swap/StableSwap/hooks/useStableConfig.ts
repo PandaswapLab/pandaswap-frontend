@@ -9,8 +9,9 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import useSWRImmutable from 'swr/immutable'
 import { getStableConfig } from '@pancakeswap/farms/constants'
 import { deserializeToken } from '@pancakeswap/tokens'
+import { StableFarm } from '../types'
 
-export function useStableFarms() {
+export function useStableFarms(): StableFarm[] {
   const { chainId } = useActiveWeb3React()
 
   const { data: stableFarms = [] } = useSWRImmutable(chainId && ['stable-farms', chainId], async () => {
@@ -24,7 +25,7 @@ export function useStableFarms() {
     }))
   })
 
-  return stableFarms
+  return stableFarms as StableFarm[]
 }
 
 function useFindStablePair({ tokenA, tokenB }) {

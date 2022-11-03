@@ -1,7 +1,11 @@
+import { SerializedStableFarmConfig } from '@pancakeswap/farms'
 import { CurrencyAmount, Price, Percent, TradeType, Fraction, ONE, Currency } from '@pancakeswap/sdk'
+import stableSwapABI from 'config/abi/stableSwap.json'
+import { useContract } from 'hooks/useContract'
 import { laggyMiddleware } from 'hooks/useSWRContract'
 import { useCallback, useMemo, useContext, useDeferredValue } from 'react'
 import useSWR from 'swr'
+import { StableFarm } from '../types'
 import { StableConfigContext } from './useStableConfig'
 
 export interface StableTrade {
@@ -31,14 +35,14 @@ export const minimumAmountOutFactory = (currencyAmountOut: CurrencyAmount<Curren
 interface UseStableTradeResponse {
   currencyAmountIn: CurrencyAmount<Currency>
   currencyAmountOut: CurrencyAmount<Currency>
-  stableSwapConfig: any
+  stableFarm: StableFarm
   tradeType: TradeType
 }
 
 export function useStableTradeResponse({
   currencyAmountIn,
   currencyAmountOut,
-  stableSwapConfig,
+  stableFarm,
   tradeType,
 }: UseStableTradeResponse) {
   const maximumAmountIn = useCallback(
@@ -67,7 +71,7 @@ export function useStableTradeResponse({
     [currencyAmountOut, tradeType],
   )
 
-  const isInvalid = !currencyAmountIn || !currencyAmountOut || !stableSwapConfig || !currencyAmountIn
+  const isInvalid = !currencyAmountIn || !currencyAmountOut || !stableFarm || !currencyAmountIn
 
   const executionPrice = useMemo(() => {
     if (isInvalid) return null
@@ -93,18 +97,27 @@ export function useStableTradeResponse({
   }
 }
 
-export function useEstimatedAmount({ estimatedCurrency, stableSwapConfig, quotient, stableSwapContract }) {
+export function useEstimatedAmount({
+  estimatedCurrency,
+  quotient,
+  stableFarm,
+}: {
+  estimatedCurrency?: Currency
+  quotient?: string
+  stableFarm?: StableFarm
+}) {
   const deferQuotient = useDeferredValue(quotient)
+  const stableSwapContract = useContract(stableFarm?.stableSwapAddress, stableSwapABI)
 
   return useSWR(
-    stableSwapConfig?.stableSwapAddress && estimatedCurrency && !!deferQuotient
-      ? ['swapContract', stableSwapConfig?.stableSwapAddress, deferQuotient]
+    stableSwapContract && estimatedCurrency && !!deferQuotient
+      ? ['swapContract', stableFarm?.stableSwapAddress, deferQuotient]
       : null,
     async () => {
-      const isToken0 = stableSwapConfig?.token0?.address === estimatedCurrency?.address
+      const isToken0 =
+        estimatedCurrency && estimatedCurrency.isToken && stableFarm?.token0?.address === estimatedCurrency?.address
 
       const args = isToken0 ? [1, 0, deferQuotient] : [0, 1, deferQuotient]
-
       const estimatedAmount = await stableSwapContract.get_dy(...args)
 
       return CurrencyAmount.fromRawAmount(estimatedCurrency, estimatedAmount)
@@ -121,22 +134,20 @@ export function useEstimatedAmount({ estimatedCurrency, stableSwapConfig, quotie
 export default function useStableTradeExactIn(
   currencyAmountIn?: CurrencyAmount<Currency>,
   currencyOut?: Currency,
+  stableFarm?: StableFarm,
 ): StableTrade | null {
-  const { stableSwapContract, stableSwapConfig } = useContext(StableConfigContext)
-
   const currencyAmountInQuotient = currencyAmountIn?.quotient?.toString()
 
   const { data: currencyAmountOut } = useEstimatedAmount({
     estimatedCurrency: currencyOut,
     quotient: currencyAmountInQuotient,
-    stableSwapContract,
-    stableSwapConfig,
+    stableFarm,
   })
 
   return useStableTradeResponse({
     currencyAmountIn,
     currencyAmountOut,
-    stableSwapConfig,
+    stableFarm,
     tradeType: TradeType.EXACT_INPUT,
   })
 }

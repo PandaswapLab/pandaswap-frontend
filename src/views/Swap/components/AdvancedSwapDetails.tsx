@@ -55,7 +55,7 @@ function TradeSummary({
           <Text fontSize="14px">{allowedSlippage / 100}%</Text>
         </RowFixed>
       </RowBetween>
-      <RowBetween>
+      {/* <RowBetween>
         <RowFixed>
           <Text fontSize="14px" color="textSubtle">
             {isExactIn ? t('Minimum received') : t('Maximum sold')}
@@ -76,7 +76,7 @@ function TradeSummary({
               : `${slippageAdjustedAmounts[Field.INPUT]?.toSignificant(4)} ${trade.inputAmount.currency.symbol}` ?? '-'}
           </Text>
         </RowFixed>
-      </RowBetween>
+      </RowBetween> */}
       <RowBetween>
         <RowFixed>
           <Text fontSize="14px" color="textSubtle">
@@ -90,7 +90,7 @@ function TradeSummary({
         </RowFixed>
         <FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
       </RowBetween>
-
+      {/* 
       <RowBetween>
         <RowFixed>
           <Text fontSize="14px" color="textSubtle">
@@ -112,7 +112,7 @@ function TradeSummary({
         <Text fontSize="14px">
           {realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
         </Text>
-      </RowBetween>
+      </RowBetween> */}
     </AutoColumn>
   )
 }

@@ -14,7 +14,7 @@ import {
 } from '@pancakeswap/sdk'
 import { BIG_INT_ZERO } from 'config/constants/exchange'
 import { FetchStatus } from 'config/constants/types'
-import { useTradeExactIn } from 'hooks/Trades'
+import { useNormalTradeExactIn } from 'hooks/Trades'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useZapContract } from 'hooks/useContract'
 import useNativeCurrency from 'hooks/useNativeCurrency'
@@ -296,7 +296,10 @@ function useZapInGasOverhead(inputAmount: CurrencyAmount<Currency> | undefined) 
   const requiredGasAsCurrencyAmount = inputAmount ? tryParseAmount(requiredGas, native) : undefined
   const inputIsBNB = inputAmount?.currency.symbol === 'BNB'
 
-  const gasCostInInputTokens = useTradeExactIn(requiredGasAsCurrencyAmount, inputIsBNB ? null : inputAmount?.currency)
+  const gasCostInInputTokens = useNormalTradeExactIn(
+    requiredGasAsCurrencyAmount,
+    inputIsBNB ? null : inputAmount?.currency,
+  )
 
   return gasCostInInputTokens?.outputAmount?.greaterThan(inputAmount?.quotient) ?? false
 }

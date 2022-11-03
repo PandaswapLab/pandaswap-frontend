@@ -6,7 +6,7 @@ import { updateUserBalance } from 'state/pools'
 import { Native, PRIMARY_CHAIN_ID } from '@pancakeswap/sdk'
 import { DEX_TOKEN } from '@pancakeswap/tokens'
 import tryParseAmount from '@pancakeswap/utils/tryParseAmount'
-import { useTradeExactOut } from 'hooks/Trades'
+import { useNormalTradeExactOut } from 'hooks/Trades'
 import { useSwapCallback } from 'hooks/useSwapCallback'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useSwapCallArguments } from 'hooks/useSwapCallArguments'
@@ -23,7 +23,7 @@ export const useExtendEnable = () => {
 
   const parsedAmount = tryParseAmount(swapAmount, DEX_TOKEN[chainId])
 
-  const trade = useTradeExactOut(Native.onChain(PRIMARY_CHAIN_ID), parsedAmount)
+  const trade = useNormalTradeExactOut(Native.onChain(PRIMARY_CHAIN_ID), parsedAmount)
 
   const swapCalls = useSwapCallArguments(trade, INITIAL_ALLOWED_SLIPPAGE, null)
 

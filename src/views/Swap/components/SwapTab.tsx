@@ -31,6 +31,7 @@ export default function SwapTab({ children, showStable }) {
   const [swapTypeState, setSwapType] = useState(SwapType.SWAP)
   const { theme } = useTheme()
 
+  console.log('DUPA1', showStable)
   if (showStable) {
     return (
       <>

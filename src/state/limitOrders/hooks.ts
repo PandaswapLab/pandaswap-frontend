@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { wrappedCurrency } from 'utils/wrappedCurrency'
 import { useCurrency } from 'hooks/Tokens'
-import { useTradeExactIn, useTradeExactOut } from 'hooks/Trades'
+import { useNormalTradeExactIn, useNormalTradeExactOut } from 'hooks/Trades'
 import getPriceForOneToken from 'views/LimitOrders/utils/getPriceForOneToken'
 import { isAddress } from 'utils'
 import tryParseAmount from '@pancakeswap/utils/tryParseAmount'
@@ -318,17 +318,17 @@ export const useDerivedOrderInfo = (): DerivedOrderInfo => {
 
   // Get trade object
   // gonna be null if not isExactIn or if there is no outputCurrency selected
-  const bestTradeExactIn = useTradeExactIn(isExactIn ? tradeAmount : undefined, outputCurrency)
+  const bestTradeExactIn = useNormalTradeExactIn(isExactIn ? tradeAmount : undefined, outputCurrency)
   // Works similarly to swap when you modify outputCurrency
   // But also is used when desired rate is modified
   // in other words it looks for a trade of inputCurrency for whatever the amount of tokens would be at desired rate
-  const bestTradeExactOut = useTradeExactOut(inputCurrency, !isExactIn || isOutputBasis ? tradeAmount : undefined)
+  const bestTradeExactOut = useNormalTradeExactOut(inputCurrency, !isExactIn || isOutputBasis ? tradeAmount : undefined)
   const trade = isExactIn ? bestTradeExactIn : bestTradeExactOut
 
   // Get swap price for single token disregarding slippage and price impact
   // needed for chart's latest value
   const oneInputToken = tryParseAmount('1', currencies.input)
-  const singleTokenTrade = useTradeExactIn(oneInputToken, currencies.output)
+  const singleTokenTrade = useNormalTradeExactIn(oneInputToken, currencies.output)
   const singleTokenPrice = parseFloat(singleTokenTrade?.executionPrice?.toSignificant(6))
   const inverseSingleTokenPrice = 1 / singleTokenPrice
 

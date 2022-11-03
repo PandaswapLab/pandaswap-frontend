@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { formatUnits } from '@ethersproject/units'
 import { CurrencyAmount, Price, Currency } from '@pancakeswap/sdk'
 import { BigNumber } from '@ethersproject/bignumber'
-import { useTradeExactIn } from 'hooks/Trades'
+import { useNormalTradeExactIn } from 'hooks/Trades'
 import tryParseAmount from '@pancakeswap/utils/tryParseAmount'
 import { Rate } from 'state/limitOrders/types'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -29,7 +29,10 @@ export default function useGasOverhead(
 
   const inputIsBNB = inputAmount?.currency.symbol === 'BNB'
 
-  const gasCostInInputTokens = useTradeExactIn(requiredGasAsCurrencyAmount, inputIsBNB ? null : inputAmount?.currency)
+  const gasCostInInputTokens = useNormalTradeExactIn(
+    requiredGasAsCurrencyAmount,
+    inputIsBNB ? null : inputAmount?.currency,
+  )
 
   const bufferedOutputAmount = useMemo(() => {
     if (inputIsBNB) return requiredGasAsCurrencyAmount

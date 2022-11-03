@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Currency } from '@pancakeswap/sdk'
+import { ChainId, Currency } from '@pancakeswap/sdk'
 import { Box, Flex, BottomDrawer, useMatchBreakpoints } from '@pancakeswap/uikit'
 import Footer from 'components/Menu/Footer'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -23,7 +23,7 @@ import SwapTab, { SwapType } from './components/SwapTab'
 const CHART_SUPPORT_CHAIN_IDS = []
 export const ACCESS_TOKEN_SUPPORT_CHAIN_IDS = []
 
-const STABLE_SUPPORT_CHAIN_IDS = []
+const STABLE_SUPPORT_CHAIN_IDS = [ChainId.PULSECHAIN_TESTNET]
 
 export default function Swap() {
   const { isMobile } = useMatchBreakpoints()
@@ -103,23 +103,12 @@ export default function Swap() {
           <StyledSwapContainer $isChartExpanded={isChartExpanded}>
             <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'}>
               <AppBody>
-                <SwapTab showStable={isStableSupported}>
-                  {(swapTypeState) =>
-                    swapTypeState === SwapType.STABLE_SWAP ? (
-                      <StableSwapFormContainer
-                        setIsChartDisplayed={setIsChartDisplayed}
-                        isChartDisplayed={isChartDisplayed}
-                      />
-                    ) : (
-                      <SwapForm
-                        isAccessTokenSupported={isAccessTokenSupported}
-                        setIsChartDisplayed={setIsChartDisplayed}
-                        isChartDisplayed={isChartDisplayed}
-                        isChartSupported={isChartSupported}
-                      />
-                    )
-                  }
-                </SwapTab>
+                <SwapForm
+                  isAccessTokenSupported={isAccessTokenSupported}
+                  setIsChartDisplayed={setIsChartDisplayed}
+                  isChartDisplayed={isChartDisplayed}
+                  isChartSupported={isChartSupported}
+                />
               </AppBody>
             </StyledInputCurrencyWrapper>
           </StyledSwapContainer>

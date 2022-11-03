@@ -302,34 +302,18 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
                 <AddressInputPanel id="recipient" value={recipient} onChange={onChangeRecipient} />
               </>
             ) : null}
-
-            {/* {showWrap ? null : (
-              <AutoColumn gap="7px" style={{ padding: '0 16px' }}>
-                <RowBetween align="center">
-                  {Boolean(trade) && (
-                    <>
-                      <Label>{t('Price')}</Label>
-                      {isLoading ? (
-                        <Skeleton width="100%" ml="8px" height="24px" />
-                      ) : (
-                        <TradePrice
-                          price={trade?.executionPrice}
-                          showInverted={showInverted}
-                          setShowInverted={setShowInverted}
-                        />
-                      )}
-                    </>
-                  )}
-                </RowBetween>
-                <RowBetween align="center">
-                  <Label>{t('Slippage Tolerance')}</Label>
-                  <Text bold color="primary">
-                    {allowedSlippage / 100}%
-                  </Text>
-                </RowBetween>
-              </AutoColumn>
-            )} */}
           </AutoColumn>
+          {!swapIsUnsupported ? (
+            trade && (
+              <AdvancedSwapDetailsDropdown
+                trade={trade}
+                showInverted={showInverted}
+                setShowInverted={setShowInverted}
+              />
+            )
+          ) : (
+            <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} />
+          )}
           <Box mt="1rem">
             <SwapCommitButton
               swapIsUnsupported={swapIsUnsupported}
@@ -353,13 +337,6 @@ export default function SwapForm({ setIsChartDisplayed, isChartDisplayed, isAcce
             />
           </Box>
         </Wrapper>
-        {!swapIsUnsupported ? (
-          trade && (
-            <AdvancedSwapDetailsDropdown trade={trade} showInverted={showInverted} setShowInverted={setShowInverted} />
-          )
-        ) : (
-          <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} />
-        )}
       </>
     </>
   )

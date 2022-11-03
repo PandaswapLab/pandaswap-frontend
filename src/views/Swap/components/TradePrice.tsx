@@ -13,11 +13,11 @@ export default function TradePrice({ price, showInverted, setShowInverted }: Tra
 
   const show = Boolean(price?.baseCurrency && price?.quoteCurrency)
   const label = showInverted
-    ? `${price?.quoteCurrency?.symbol} per ${price?.baseCurrency?.symbol}`
-    : `${price?.baseCurrency?.symbol} per ${price?.quoteCurrency?.symbol}`
+    ? `${price?.quoteCurrency?.symbol} = 1 ${price?.baseCurrency?.symbol}`
+    : `${price?.baseCurrency?.symbol} = 1 ${price?.quoteCurrency?.symbol}`
 
   return (
-    <Text style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
+    <Text style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }} fontSize="14px">
       {show ? (
         <>
           {formattedPrice ?? '-'} {label}
